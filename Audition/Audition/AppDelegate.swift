@@ -58,9 +58,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+
 extension AppDelegate {
+
+    /// Setup system logging facility
     func initializeLogging() {
         log.addDestination(ConsoleDestination())
     }
+    
 }
 
