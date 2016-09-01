@@ -9,5 +9,9 @@
 import Foundation
 
 class EarthService {
+
+    func forwardGeolocateLocation(locationName:NSString) {  //NOTE: (DL) probably going to use closure here
+        
+    }
     
 }

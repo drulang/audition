@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+class IssLocation: Location {
+    
+}
+
+class IssLocationFuture: IssLocation {
+    var risetime:NSDate?
+    var duration:NSTimeInterval?
+}

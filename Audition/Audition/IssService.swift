@@ -9,5 +9,9 @@
 import Foundation
 
 class IssService {
+ 
+    func nextOverheadPassPrediction(atLocation location:Location) -> IssLocationFuture {
+        return IssLocationFuture()
+    }
     
 }
