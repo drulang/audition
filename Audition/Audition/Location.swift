@@ -10,4 +10,13 @@ import Foundation
 
 class Location {
 
+    let lat:Float
+    let lon:Float
+    
+    
+    init(latitude:Float, longitude:Float) {
+        lat = latitude
+        lon = longitude
+        
+    }
 }

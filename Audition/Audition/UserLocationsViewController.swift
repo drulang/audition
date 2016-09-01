@@ -13,6 +13,10 @@ class UserLocationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let userLoc = EarthLocation(latitude: 44, longitude: 30.0)
+        
+        IssService().nextOverheadPassPrediction(atLocation: userLoc)
     }
 }
 

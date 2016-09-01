@@ -12,7 +12,8 @@ class IssLocation: Location {
     
 }
 
-class IssLocationFuture: IssLocation {
+//TODO: Might want to rename this, a bit confusing since it doesn't subclass Location
+class IssLocationFuture {
     var risetime:NSDate?
     var duration:NSTimeInterval?
 }
