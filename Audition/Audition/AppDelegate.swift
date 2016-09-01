@@ -8,6 +8,12 @@
 
 import UIKit
 
+import SwiftyBeaver
+
+
+let log = SwiftyBeaver.self
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        
+        initializeLogging()
+
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         let rootViewController = ViewController()
@@ -50,7 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+}
 
-
+extension AppDelegate {
+    func initializeLogging() {
+        log.addDestination(ConsoleDestination())
+    }
 }
 
