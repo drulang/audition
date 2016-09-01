@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let rootViewController = ViewController()
+        let rootViewController = UserLocationsViewController()
         rootViewController.view.backgroundColor = UIColor.grayColor()
         
         window?.rootViewController = rootViewController
