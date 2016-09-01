@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "BDB76F54EDDB72B123A7BC111661C64230E1E961",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "BDB76F54EDDB72B123A7BC111661C64230E1E961" : 9223372036854775807,
+    "5C7E3A2B9F0B37C9C15B04E36C7BC8C3B1069459" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "BBA01171-4BC3-4001-A18F-CF1DC0160169",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "BDB76F54EDDB72B123A7BC111661C64230E1E961" : "audition\/",
+    "5C7E3A2B9F0B37C9C15B04E36C7BC8C3B1069459" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Audition",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Audition\/Audition.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:drulang\/woodworking.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5C7E3A2B9F0B37C9C15B04E36C7BC8C3B1069459"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:\/drulang\/audition",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BDB76F54EDDB72B123A7BC111661C64230E1E961"
+    }
+  ]
+}
