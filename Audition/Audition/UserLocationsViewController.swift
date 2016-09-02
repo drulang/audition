@@ -23,15 +23,15 @@ private struct Config {
 
 class UserLocationsViewController: UIViewController {
     private let dateFormatter = NSDateFormatter()
-    private let systemCommand:SystemCommandCenter
+    private let missionControl:MissionControl
     private let user:User
     private var constraintsAdded:Bool = false
     private let tableView:UITableView = UITableView(forAutoLayout: ())
     private let addLocationButton:UIButton = UIButton(forAutoLayout: ())
 
     //MARK: Constructors
-    init(systemCommand:SystemCommandCenter, user:User) {
-        self.systemCommand = systemCommand
+    init(missionControl:MissionControl, user:User) {
+        self.missionControl = missionControl
         self.user = user
 
         dateFormatter.dateStyle = .ShortStyle
@@ -93,18 +93,17 @@ extension UserLocationsViewController {
     }
     
     func updateUserLocationFavorite(earthLocation:EarthLocation) {
-        systemCommand.issService.nextOverheadPassPrediction(onEarth: earthLocation, withCompletion: { (futureLocation, error) in
+        missionControl.issService.nextOverheadPassPrediction(onEarth: earthLocation, withCompletion: { (futureLocation, error) in
             earthLocation.issLocationInTheFuture = futureLocation
             
-            let index = self.user.favoriteEarthLocations.indexOf({ return $0 === earthLocation })
-            
-            if index != nil {
-                let indexPath = NSIndexPath(forRow: index!, inSection: 0)
+            if let index = self.user.favoriteEarthLocations.indexOf({ return $0 === earthLocation }) {
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
         })
     }
 }
+
 
 /**
  Target/Action
@@ -112,8 +111,8 @@ extension UserLocationsViewController {
 extension UserLocationsViewController {
     func addLocationButtonTapped(sender:UIButton) {
         log.debug("Adding a new location")
-        
-        let newLocationController = NewLocationViewController(systemCommand: systemCommand)
+
+        let newLocationController = NewLocationViewController(missionControl: missionControl)
         newLocationController.delegate = self
         self.addChildViewController(newLocationController)
         newLocationController.didMoveToParentViewController(self)
@@ -147,7 +146,7 @@ extension UserLocationsViewController: NewLocationViewControllerDelegate {
 
 extension UserLocationsViewController :UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        return LocationDetailTableViewCell.preferredHeight
     }
 }
 

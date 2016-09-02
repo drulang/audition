@@ -16,9 +16,22 @@ private struct IssServiceConfig {
         static let prediction = "\(IssServiceConfig.host)/iss-pass.json"
     }
     
-    struct Parameters {
+    struct Parameter {
         static let predctionResponseLimit:Int = 1
+        static let latitude = "lat"
+        static let longitude = "lon"
+        static let limit = "n"
+        
+        struct Value {
+            static let limit:AnyObject = 1
+        }
     }
+    
+    struct ResponseKey {
+        static let response = "response"
+        static let risetime = "risetime"
+    }
+    
 }
 
 
@@ -26,9 +39,9 @@ class IssService {
     
     func nextOverheadPassPrediction(onEarth location:EarthLocation, withCompletion completion: (futureLocation:IssLocationFuture?, error:NSError?)->Void) {
         let parameters = [
-            "lat": location.coordinate.latitude,
-            "lon": location.coordinate.longitude,
-            "n": 1
+            IssServiceConfig.Parameter.latitude: location.coordinate.latitude,
+            IssServiceConfig.Parameter.longitude: location.coordinate.longitude,
+            IssServiceConfig.Parameter.limit: IssServiceConfig.Parameter.Value.limit
         ]
         
         Alamofire.request(.GET, IssServiceConfig.Paths.prediction, parameters: parameters)
@@ -37,11 +50,11 @@ class IssService {
             { response in switch response.result {
             case .Success(let JSON):
                 let response = JSON as! NSDictionary
-                let notifyAPIResponse = response.objectForKey("response")
+                let notifyAPIResponse = response.objectForKey(IssServiceConfig.ResponseKey.response)
                 var futureLocation:IssLocationFuture?
                 
                 if  notifyAPIResponse != nil && notifyAPIResponse!.count > 0 {
-                    if let risetime = notifyAPIResponse![0].objectForKey("risetime") {
+                    if let risetime = notifyAPIResponse![0].objectForKey(IssServiceConfig.ResponseKey.risetime) {
                         futureLocation = IssLocationFuture(risetime: NSTimeInterval(risetime.unsignedIntegerValue))
                         log.info("Successfully predicted nextoverhead pass of ISS")
                     } else {

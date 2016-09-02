@@ -18,7 +18,7 @@
 		71D135E61D78EF670087F396 /* EarthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135E51D78EF670087F396 /* EarthService.swift */; };
 		71D135E81D78EF840087F396 /* IssService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135E71D78EF840087F396 /* IssService.swift */; };
 		71D135EA1D78EFE90087F396 /* HQService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135E91D78EFE90087F396 /* HQService.swift */; };
-		71D135EC1D78EFFD0087F396 /* SystemCommandCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135EB1D78EFFD0087F396 /* SystemCommandCenter.swift */; };
+		71D135EC1D78EFFD0087F396 /* MissionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135EB1D78EFFD0087F396 /* MissionControl.swift */; };
 		71D135EE1D78F02B0087F396 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135ED1D78F02B0087F396 /* User.swift */; };
 		71D135F31D78F0520087F396 /* EarthLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135F21D78F0520087F396 /* EarthLocation.swift */; };
 		71D135F51D78F05A0087F396 /* IssLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135F41D78F05A0087F396 /* IssLocation.swift */; };
@@ -40,7 +40,7 @@
 		71D135E51D78EF670087F396 /* EarthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarthService.swift; sourceTree = "<group>"; };
 		71D135E71D78EF840087F396 /* IssService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssService.swift; sourceTree = "<group>"; };
 		71D135E91D78EFE90087F396 /* HQService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HQService.swift; sourceTree = "<group>"; };
-		71D135EB1D78EFFD0087F396 /* SystemCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemCommandCenter.swift; sourceTree = "<group>"; };
+		71D135EB1D78EFFD0087F396 /* MissionControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionControl.swift; sourceTree = "<group>"; };
 		71D135ED1D78F02B0087F396 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		71D135F21D78F0520087F396 /* EarthLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarthLocation.swift; sourceTree = "<group>"; };
 		71D135F41D78F05A0087F396 /* IssLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssLocation.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		71D135E41D78EF500087F396 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				71D135EB1D78EFFD0087F396 /* SystemCommandCenter.swift */,
+				71D135EB1D78EFFD0087F396 /* MissionControl.swift */,
 				71D135E51D78EF670087F396 /* EarthService.swift */,
 				71D135E71D78EF840087F396 /* IssService.swift */,
 				71D135E91D78EFE90087F396 /* HQService.swift */,
@@ -322,7 +322,7 @@
 				7168F1A31D78480D0079FC1F /* AppDelegate.swift in Sources */,
 				71D135EA1D78EFE90087F396 /* HQService.swift in Sources */,
 				715D75B51D79A8FF00FC0BCF /* Coordinate.swift in Sources */,
-				71D135EC1D78EFFD0087F396 /* SystemCommandCenter.swift in Sources */,
+				71D135EC1D78EFFD0087F396 /* MissionControl.swift in Sources */,
 				71D135E81D78EF840087F396 /* IssService.swift in Sources */,
 				71D135EE1D78F02B0087F396 /* User.swift in Sources */,
 				715D75B31D7919B600FC0BCF /* NewLocationViewController.swift in Sources */,

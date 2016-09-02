@@ -21,7 +21,7 @@ struct Apperance {
     }
     
     struct Font {
-        static let name = "Avenir"
+        static let name = "Courier New"
         static let headlineFont = UIFont(name: Font.name, size: 25)
         static let titleFont = UIFont(name: Font.name, size: 19)
         static let subtitleFont = UIFont(name: Font.name, size: 17)

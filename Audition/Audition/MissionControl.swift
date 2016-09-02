@@ -11,9 +11,9 @@ import Foundation
 /**
 
  */
-class SystemCommandCenter {
+class MissionControl {
     let earthService = EarthService()
     let issService = IssService()
     let hqService = HQService()
-    
+    //TODO: Note about puttting abstractions in here that involve multiple services
 }

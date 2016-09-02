@@ -10,7 +10,7 @@ import Foundation
 class HQService {
     
     func retrieveUser(userId:UInt, completion:(user:User, error:NSError?)->Void) {
-        //TODO: Wire up to some REST API/LocalDB/Space station
+        //NOTE: Wire up to some REST API/LocalDB/Space station
         let user = User(userId: userId)
 
         let nycCoordinate = Coordinate(latitude: 40.713054, longitude: -74.007227)

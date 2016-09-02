@@ -10,6 +10,8 @@ import PureLayout
 import UIKit
 
 class LocationDetailTableViewCell: UITableViewCell {
+    static let preferredHeight:CGFloat = 100
+
     private var constraintsAdded:Bool = false
     
     let locationNameLabel = UILabel(forAutoLayout: ())
@@ -52,6 +54,10 @@ class LocationDetailTableViewCell: UITableViewCell {
             constraintsAdded = true
         }
         super.updateConstraints()
+    }
+    
+    override func intrinsicContentSize() -> CGSize {
+        return CGSize(width: 100, height: 100)
     }
 }
 

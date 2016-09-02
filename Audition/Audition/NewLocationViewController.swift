@@ -18,7 +18,7 @@ protocol NewLocationViewControllerDelegate {
 
 class NewLocationViewController: UIViewController {
     
-    private let systemCommand:SystemCommandCenter
+    private let missionControl:MissionControl
     private var constraintsAdded:Bool = false
     private let locationNameTextField:UITextField = UITextField(forAutoLayout: ())
     private let saveButton:UIButton = UIButton(forAutoLayout: ())
@@ -27,8 +27,8 @@ class NewLocationViewController: UIViewController {
     var delegate:NewLocationViewControllerDelegate?
 
     //MARK: Constructors
-    init(systemCommand:SystemCommandCenter) {
-        self.systemCommand = systemCommand
+    init(missionControl:MissionControl) {
+        self.missionControl = missionControl
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -113,7 +113,7 @@ extension NewLocationViewController {
         setInterfaceLoading()
 
         if let locationText = locationNameTextField.text {
-            systemCommand.earthService.forwardGeolocateLocation(locationText, withCompletion: { (coordinate, name, error) in
+            missionControl.earthService.forwardGeolocateLocation(locationText, withCompletion: { (coordinate, name, error) in
                 log.info("Created new location: \(coordinate)")
                 
                 if let _ = self.delegate {
