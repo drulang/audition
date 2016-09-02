@@ -11,25 +11,38 @@ import Foundation
 
 class IssService {
  
-    func nextOverheadPassPrediction(atLocation location:Location) -> IssLocationFuture {
+    func nextOverheadPassPrediction(atLocation location:Location) {
 
         let parameters = [
-            "lat": location.lat,  //44
-            "lon": location.lon,  //30.0
+            "lat": location.lat,
+            "lon": location.lon,
             "n": 1
         ]
         
         Alamofire.request(.GET, "http://api.open-notify.org/iss-pass.json", parameters: parameters)
             .validate()
-            .responseJSON { response in
-                log.info("Successfully predicted next ISS overhead pass")
-                log.debug(response)
+            .responseJSON
+            { response in switch response.result {
+            case .Success(let JSON):
+                log.info("Successfully predicted nextoverhead pass of ISS")
 
+                let response = JSON as! NSDictionary
                 
-                response
+                if let notifyAPIResponse = response.objectForKey("response") {
+                    if let risetime = notifyAPIResponse[0].objectForKey("risetime") {
+                        let futureLocation = IssLocationFuture(risetime: risetime.unsignedIntegerValue)
+                    } else {
+                        log.debug("Unable to extract a risetime at given \(location)")
+                    }
+                }
+                
+
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                }
         }
         
-        return IssLocationFuture()
     }
+    
     
 }

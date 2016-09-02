@@ -14,6 +14,10 @@ class IssLocation: Location {
 
 //TODO: Might want to rename this, a bit confusing since it doesn't subclass Location
 class IssLocationFuture {
-    var risetime:NSDate?
-    var duration:NSTimeInterval?
+    var risetimeDate:NSDate?
+    let risetime:UInt
+    
+    init(risetime rtime:UInt) {
+        risetime = rtime
+    }
 }
