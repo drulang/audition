@@ -9,10 +9,11 @@
 import Foundation
 
 class IssLocationFuture {
-    var risetimeDate:NSDate?
+    var risetimeDate:NSDate
     let risetime:UInt
     
     init(risetime rtime:UInt) {
         risetime = rtime
+        risetimeDate = NSDate()
     }
 }

@@ -13,6 +13,8 @@ class EarthLocation {
     var name:String?
     var alias:String?
     
+    var issLocationInTheFuture:IssLocationFuture?
+    
     init(coordinate:CLLocationCoordinate2D) {
         self.coordinate = coordinate
     }

@@ -115,8 +115,12 @@ extension UserLocationsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier(Config.TableView.cellId, forIndexPath: indexPath)
         
         let location = self.user.favoriteEarthLocations[indexPath.row]
-
-        cell.textLabel?.text = location.alias
+        
+        if let issDate = location.issLocationInTheFuture?.risetimeDate {
+            cell.textLabel?.text = "\(location.alias) - \(issDate)"
+        } else {
+            cell.textLabel?.text = location.alias
+        }
 
         return cell
         
