@@ -201,7 +201,7 @@ extension UserLocationsViewController: UITableViewDataSource {
 
             cell.locationDetailLabel.text = dateFormatted
         } else {
-            cell.textLabel?.text = location.alias
+            cell.locationDetailLabel.text = "-"
         }
 
         return cell
