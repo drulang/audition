@@ -22,18 +22,22 @@ private struct Config {
 
 
 class UserLocationsViewController: UIViewController {
+    private let dateFormatter = NSDateFormatter()
 
     private let systemCommand:SystemCommandCenter
     private let user:User
     private var constraintsAdded:Bool = false
     private let tableView:UITableView = UITableView(forAutoLayout: ())
     private let addLocationButton:UIButton = UIButton(forAutoLayout: ())
-    
+
     //MARK: Constructors
     init(systemCommand:SystemCommandCenter, user:User) {
         self.systemCommand = systemCommand
         self.user = user
         
+        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.timeStyle = .ShortStyle
+    
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -53,6 +57,7 @@ class UserLocationsViewController: UIViewController {
         addLocationButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
         addLocationButton.addTarget(self, action: #selector(addLocationButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
 
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: Config.TableView.cellId)
         
@@ -94,6 +99,7 @@ extension UserLocationsViewController {
             
         }
     }
+
 }
 
 
@@ -106,25 +112,31 @@ extension UserLocationsViewController: NewLocationViewControllerDelegate {
 }
 
 
+extension UserLocationsViewController :UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 65
+    }
+}
+
 extension UserLocationsViewController: UITableViewDataSource {
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.user.favoriteEarthLocations.count
     }
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Config.TableView.cellId, forIndexPath: indexPath)
         
         let location = self.user.favoriteEarthLocations[indexPath.row]
         
         if let issDate = location.issLocationInTheFuture?.risetimeDate {
-            cell.textLabel?.text = "\(location.alias) - \(issDate)"
+            let dateFormatted = dateFormatter.stringFromDate(issDate)
+            cell.textLabel?.text = "\(location.alias) - \(dateFormatted)"
         } else {
             cell.textLabel?.text = location.alias
         }
 
         return cell
-        
     }
-    
 }
 

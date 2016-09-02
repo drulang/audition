@@ -8,7 +8,9 @@
 
 import Foundation
 
+
 class IssLocationFuture {
+
     var risetimeDate:NSDate
     let risetime:NSTimeInterval
     
