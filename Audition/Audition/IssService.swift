@@ -9,8 +9,20 @@ import Alamofire
 
 import Foundation
 
+struct IssServiceConfig {
+    static let host = "http://api.open-notify.org"
+    
+    struct Paths {
+        static let prediction = "\(IssServiceConfig.host)/iss-pass.json"
+    }
+    
+    struct Parameters {
+        static let predctionResponseLimit:Int = 1
+    }
+}
+
 class IssService {
- 
+    
     func nextOverheadPassPrediction(atLocation location:Location, withCompletion completion: (futureLocation:IssLocationFuture?)->Void) {
 
         let parameters = [
@@ -19,7 +31,7 @@ class IssService {
             "n": 1
         ]
         
-        Alamofire.request(.GET, "http://api.open-notify.org/iss-pass.json", parameters: parameters)
+        Alamofire.request(.GET, IssServiceConfig.Paths.prediction, parameters: parameters)
             .validate()
             .responseJSON
             { response in switch response.result {
