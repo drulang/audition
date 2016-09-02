@@ -7,6 +7,7 @@
 //
 import Alamofire
 
+import CoreLocation
 import Foundation
 
 struct IssServiceConfig {
@@ -21,13 +22,13 @@ struct IssServiceConfig {
     }
 }
 
+
 class IssService {
     
-    func nextOverheadPassPrediction(atLocation location:Location, withCompletion completion: (futureLocation:IssLocationFuture?)->Void) {
-
+    func nextOverheadPassPrediction(atLocation location:CLLocationCoordinate2D, withCompletion completion: (futureLocation:IssLocationFuture?)->Void) {
         let parameters = [
-            "lat": location.lat,
-            "lon": location.lon,
+            "lat": location.latitude,
+            "lon": location.longitude,
             "n": 1
         ]
         

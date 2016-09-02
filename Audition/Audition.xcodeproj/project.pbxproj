@@ -16,9 +16,9 @@
 		71D135EA1D78EFE90087F396 /* LocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135E91D78EFE90087F396 /* LocalService.swift */; };
 		71D135EC1D78EFFD0087F396 /* SystemCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135EB1D78EFFD0087F396 /* SystemCommand.swift */; };
 		71D135EE1D78F02B0087F396 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135ED1D78F02B0087F396 /* User.swift */; };
-		71D135F01D78F03E0087F396 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135EF1D78F03E0087F396 /* Location.swift */; };
 		71D135F31D78F0520087F396 /* EarthLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135F21D78F0520087F396 /* EarthLocation.swift */; };
 		71D135F51D78F05A0087F396 /* IssLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D135F41D78F05A0087F396 /* IssLocation.swift */; };
+		71D135F71D7900A30087F396 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71D135F61D7900A30087F396 /* CoreLocation.framework */; };
 		C989AF5DBE9C4EB0641A7AF8 /* Pods_Audition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB376D2AF3BDDEB712570567 /* Pods_Audition.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,9 +34,9 @@
 		71D135E91D78EFE90087F396 /* LocalService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalService.swift; sourceTree = "<group>"; };
 		71D135EB1D78EFFD0087F396 /* SystemCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemCommand.swift; sourceTree = "<group>"; };
 		71D135ED1D78F02B0087F396 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		71D135EF1D78F03E0087F396 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		71D135F21D78F0520087F396 /* EarthLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarthLocation.swift; sourceTree = "<group>"; };
 		71D135F41D78F05A0087F396 /* IssLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssLocation.swift; sourceTree = "<group>"; };
+		71D135F61D7900A30087F396 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E0F824ACB44A98CB476C61E3 /* Pods-Audition.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audition.release.xcconfig"; path = "Pods/Target Support Files/Pods-Audition/Pods-Audition.release.xcconfig"; sourceTree = "<group>"; };
 		FB376D2AF3BDDEB712570567 /* Pods_Audition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Audition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB5D140DD43707C977BBA52C /* Pods-Audition.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audition.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Audition/Pods-Audition.debug.xcconfig"; sourceTree = "<group>"; };
@@ -47,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71D135F71D7900A30087F396 /* CoreLocation.framework in Frameworks */,
 				C989AF5DBE9C4EB0641A7AF8 /* Pods_Audition.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +67,7 @@
 		662826BE7A4A7BAD74A6E486 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				71D135F61D7900A30087F396 /* CoreLocation.framework */,
 				FB376D2AF3BDDEB712570567 /* Pods_Audition.framework */,
 			);
 			name = Frameworks;
@@ -166,7 +168,6 @@
 		71D135F11D78F0410087F396 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				71D135EF1D78F03E0087F396 /* Location.swift */,
 				71D135F21D78F0520087F396 /* EarthLocation.swift */,
 				71D135F41D78F05A0087F396 /* IssLocation.swift */,
 			);
@@ -297,7 +298,6 @@
 				71D135F51D78F05A0087F396 /* IssLocation.swift in Sources */,
 				71D135E61D78EF670087F396 /* EarthService.swift in Sources */,
 				7168F1A51D78480D0079FC1F /* UserLocationsViewController.swift in Sources */,
-				71D135F01D78F03E0087F396 /* Location.swift in Sources */,
 				7168F1A31D78480D0079FC1F /* AppDelegate.swift in Sources */,
 				71D135EA1D78EFE90087F396 /* LocalService.swift in Sources */,
 				71D135EC1D78EFFD0087F396 /* SystemCommand.swift in Sources */,

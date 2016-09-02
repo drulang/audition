@@ -14,11 +14,16 @@ class UserLocationsViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let userLoc = EarthLocation(latitude: 44, longitude: 30.0)
+//        let userLoc = EarthLocation(latitude: 44, longitude: 30.0)
+//        
+//        IssService().nextOverheadPassPrediction(atLocation: userLoc) { (futureLocation) in
+//            log.debug("Received future loc: \(futureLocation)")
+//        }
         
-        IssService().nextOverheadPassPrediction(atLocation: userLoc) { (futureLocation) in
-            log.debug("Received future loc: \(futureLocation)")
-        }
+        let earth = EarthService().forwardGeolocateLocation("New york, new york") { (location) in
+            log.debug("Recieved loc: \(location)")
+        };
+        
     }
 }
 
