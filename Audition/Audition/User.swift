@@ -9,5 +9,11 @@
 import Foundation
 
 class User {
+    let userId:UInt
+    var favoriteEarthLocations:[EarthLocation] = []
     
+    
+    init(userId uid:UInt) {
+        userId = uid
+    }
 }
