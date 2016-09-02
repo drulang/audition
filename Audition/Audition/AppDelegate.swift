@@ -22,13 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Use dependency injection
     private let missionControl = MissionControl()
     
-    var user:User?// TODO: (DL) Rethink this, feels like it might belong in SysCommandCenter
+    var user:User?// TODO: (DL) Rethink this, feels like it might belong in MissionControl
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         initializeLogging()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        //TODO: Note the async nature of this and needing to show a loading screen, and have a more sophisticated way of routing controllers at the top level
+        //TODO: If this were real I would go about this in a very different manner.  I would probably have some sort of RootController class
+        // that would be set to window.rootVC and then within RootController provide the logic and mechanisms for loading the first screen
+        // based on the current app state.
         missionControl.hqService.retrieveUser(8675309, completion: { (user, error) in
             self.user = user
 
