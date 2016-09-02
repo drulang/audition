@@ -47,7 +47,7 @@ class NewLocationViewController: UIViewController {
         activityIndictaor.hidesWhenStopped = true
         activityIndictaor.color = Apperance.Palette.accentColor
         
-        locationNameTextField.backgroundColor = UIColor.whiteColor()
+        locationNameTextField.backgroundColor = UIColor.clearColor()
         locationNameTextField.placeholder = "New location..."
         locationNameTextField.font = Apperance.Font.textfieldJumboFont
         locationNameTextField.tintColor = Apperance.Palette.accentColor
@@ -81,10 +81,15 @@ class NewLocationViewController: UIViewController {
             activityIndictaor.autoAlignAxisToSuperviewAxis(ALAxis.Vertical)
             activityIndictaor.autoConstrainAttribute(ALAttribute.Bottom, toAttribute: ALAttribute.Horizontal, ofView: self.view, withOffset: -25)
             
-            locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: 5)
-            locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: 5)
+            locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: 10)
+            locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: 10)
             locationNameTextField.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
-           
+            locationNameTextField.textColor = Apperance.Palette.Text.secondaryTextColor
+            locationNameTextField.keyboardType = UIKeyboardType.ASCIICapable
+            locationNameTextField.keyboardAppearance = UIKeyboardAppearance.Alert
+            locationNameTextField.attributedPlaceholder = NSAttributedString(string:"New location",
+                                                            attributes:[NSForegroundColorAttributeName: Apperance.Palette.Text.secondaryTextColor])
+            
             saveButton.autoPinEdgeToSuperviewEdge(ALEdge.Bottom, withInset: 50)
             saveButton.autoPinEdge(ALEdge.Right, toEdge: ALEdge.Right, ofView: locationNameTextField, withOffset: -hInset)
 

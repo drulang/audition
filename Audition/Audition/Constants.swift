@@ -10,13 +10,13 @@ import UIKit
 
 struct Apperance {
     struct Palette {
-        static let primaryColor = UIColor.whiteColor()
-        static let secondaryColor = UIColor.lightGrayColor()
-        static let accentColor = UIColor.blueColor()
+        static let primaryColor = UIColor(red: 13/255.0, green: 21/255.0, blue: 28/255.0, alpha: 1)
+        static let secondaryColor = UIColor(red: 17/255.0, green: 49/255.0, blue: 78/255.0, alpha: 1)
+        static let accentColor = UIColor(red: 174/255.0, green: 220/255.0, blue: 226/255.0, alpha: 1)
         
         struct Text {
-            static let primaryTextColor = UIColor.blueColor()
-            static let secondaryTextColor = UIColor.lightGrayColor()
+            static let primaryTextColor = UIColor(red: 174/255.0, green: 220/255.0, blue: 226/255.0, alpha: 1)
+            static let secondaryTextColor = UIColor(red: 70/255.0, green: 144/255.0, blue: 178/255.0, alpha: 1)
         }
     }
     

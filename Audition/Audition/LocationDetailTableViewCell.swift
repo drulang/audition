@@ -24,10 +24,10 @@ class LocationDetailTableViewCell: UITableViewCell {
         backgroundColor = UIColor.clearColor()
 
         locationNameLabel.font = Apperance.Font.headlineFont
-        locationNameLabel.textColor = Apperance.Palette.Text.primaryTextColor
+        locationNameLabel.textColor = Apperance.Palette.Text.secondaryTextColor
         
         locationDetailLabel.font = Apperance.Font.subtitleFont
-        locationDetailLabel.textColor = Apperance.Palette.Text.primaryTextColor
+        locationDetailLabel.textColor = Apperance.Palette.Text.secondaryTextColor
         
         contentView.addSubview(locationNameLabel)
         contentView.addSubview(locationDetailLabel)

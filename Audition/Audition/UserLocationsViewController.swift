@@ -16,7 +16,7 @@ private struct Config {
 
     struct ToolBar {
         static let hInset:CGFloat = 20
-        static let height:CGFloat = 65
+        static let height:CGFloat = 70
     }
 }
 
@@ -65,8 +65,8 @@ class UserLocationsViewController: UIViewController {
             welcomeLabel.text = "Welcome, cadet"
         }
         
-        welcomeLabel.textColor = Apperance.Palette.Text.secondaryTextColor
-        welcomeLabel.font = UIFont(name: Apperance.Font.name, size: 16)
+        welcomeLabel.textColor = Apperance.Palette.Text.primaryTextColor
+        welcomeLabel.font = UIFont(name: Apperance.Font.name, size: 17)
         
         let inset:CGFloat = 5
         addLocationButton.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
@@ -75,9 +75,12 @@ class UserLocationsViewController: UIViewController {
         addLocationButton.titleLabel?.font = Apperance.Font.buttonFont
         addLocationButton.addTarget(self, action: #selector(addLocationButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
 
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.backgroundColor = UIColor.clearColor()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(LocationDetailTableViewCell.self, forCellReuseIdentifier: Config.TableView.cellId)
+        tableView.allowsSelection = false
         
         updateViewConstraints()
     }
@@ -86,8 +89,6 @@ class UserLocationsViewController: UIViewController {
         if !constraintsAdded {
             toolBar.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: ALEdge.Bottom)
             toolBar.autoSetDimension(ALDimension.Height, toSize: Config.ToolBar.height)
-
-            toolBar.backgroundColor = Apperance.Palette.secondaryColor
 
             welcomeLabel.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: Config.ToolBar.hInset)
             welcomeLabel.autoAlignAxis(ALAxis.Horizontal, toSameAxisOfView: addLocationButton)
