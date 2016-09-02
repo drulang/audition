@@ -8,9 +8,18 @@
 import PureLayout
 import UIKit
 
+
+private struct Config {
+    struct TableView {
+        static let topInset:CGFloat = 55
+        static let cellId = "Location Cell"
+        
+    }
+}
+
+
 class UserLocationsViewController: UIViewController {
-    static let locationCellId = "Location Cell"
-    
+
     private let systemCommand:SystemCommandCenter
     private let user:User
     private var constraintsAdded:Bool = false
@@ -37,14 +46,14 @@ class UserLocationsViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: UserLocationsViewController.locationCellId)
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: Config.TableView.cellId)
         
         updateViewConstraints()
     }
     
     override func updateViewConstraints() {
         if !constraintsAdded {
-            tableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
+            tableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: Config.TableView.topInset, left: 0, bottom: 0, right: 0))
             constraintsAdded = true
         }
         super.updateViewConstraints()
@@ -62,7 +71,7 @@ extension UserLocationsViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(UserLocationsViewController.locationCellId, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(Config.TableView.cellId, forIndexPath: indexPath)
         
         let location = self.user.favoriteEarthLocations[indexPath.row]
 
