@@ -10,6 +10,12 @@ import PureLayout
 
 import UIKit
 
+
+protocol NewLocationViewControllerDelegate {
+    func newLocationViewController(controller: NewLocationViewController, didCreateNewEarthLocation location:EarthLocation)
+}
+
+
 class NewLocationViewController: UIViewController {
     
     private let systemCommand:SystemCommandCenter
@@ -18,7 +24,8 @@ class NewLocationViewController: UIViewController {
     private let saveButton:UIButton = UIButton(forAutoLayout: ())
     private let cancelButton:UIButton = UIButton(forAutoLayout: ())
     
-    
+    var delegate:NewLocationViewControllerDelegate?
+
     //MARK: Constructors
     init(systemCommand:SystemCommandCenter) {
         self.systemCommand = systemCommand
@@ -36,6 +43,7 @@ class NewLocationViewController: UIViewController {
         view.backgroundColor = UIColor.lightGrayColor()
         
         locationNameTextField.backgroundColor = UIColor.whiteColor()
+        locationNameTextField.placeholder = "Enter a new location"
         
         saveButton.setTitle("Save", forState: UIControlState.Normal)
         saveButton.addTarget(self, action: #selector(saveButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
@@ -85,12 +93,39 @@ extension NewLocationViewController {
             self.removeFromParentViewController()
         }
     }
+    
+    func setInterfaceLoading() {
+        
+    }
+    
+    func setInterfaceNormal() {
+        
+    }
 }
 
 extension NewLocationViewController {
-    
+
     func saveButtonTapped() {
-        close()
+        setInterfaceLoading()
+
+        if let locationText = locationNameTextField.text {
+            systemCommand.earthService.forwardGeolocateLocation(locationText) { (location) in
+                log.info("Created new location: \(location)")
+                
+                if let _ = self.delegate {
+                    let earthLocation = EarthLocation()
+                    earthLocation.location = location
+                    earthLocation.alias = "temp"
+
+                    self.delegate!.newLocationViewController(self, didCreateNewEarthLocation: earthLocation)
+                }
+                self.setInterfaceNormal()
+                self.close()
+            }
+        } else {
+            log.debug("No text")
+            setInterfaceNormal()
+        }
     }
     
     func cancelButtonTapped() {

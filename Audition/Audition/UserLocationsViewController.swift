@@ -53,7 +53,6 @@ class UserLocationsViewController: UIViewController {
         addLocationButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
         addLocationButton.addTarget(self, action: #selector(addLocationButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
 
-        tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: Config.TableView.cellId)
         
@@ -80,6 +79,7 @@ extension UserLocationsViewController {
         log.debug("Adding a new location")
         
         let newLocationController = NewLocationViewController(systemCommand: systemCommand)
+        newLocationController.delegate = self
         self.addChildViewController(newLocationController)
         newLocationController.didMoveToParentViewController(self)
         
@@ -97,10 +97,13 @@ extension UserLocationsViewController {
 }
 
 
-extension UserLocationsViewController: UITableViewDelegate {
-
+extension UserLocationsViewController: NewLocationViewControllerDelegate {
+    
+    func newLocationViewController(controller: NewLocationViewController, didCreateNewEarthLocation location: EarthLocation) {
+        self.user.favoriteEarthLocations.append(location)
+        tableView.reloadData()
+    }
 }
-
 
 extension UserLocationsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -117,5 +120,6 @@ extension UserLocationsViewController: UITableViewDataSource {
         return cell
         
     }
+    
 }
 
