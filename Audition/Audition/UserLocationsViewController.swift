@@ -74,9 +74,25 @@ class UserLocationsViewController: UIViewController {
     }
 }
 
+
 extension UserLocationsViewController {
     func addLocationButtonTapped(sender:UIButton) {
         log.debug("Adding a new location")
+        
+        let newLocationController = NewLocationViewController(systemCommand: systemCommand)
+        self.addChildViewController(newLocationController)
+        newLocationController.didMoveToParentViewController(self)
+        
+        self.view.addSubview(newLocationController.view)
+        
+        //TODO: (DL) COmment, move magic
+        newLocationController.view.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: 350)
+        
+        UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions(), animations: {
+            newLocationController.view.frame = CGRect(x:0, y:0, width: newLocationController.view.frame.width, height: newLocationController.view.frame.height)
+        }) { (finished) in
+            
+        }
     }
 }
 
@@ -84,6 +100,7 @@ extension UserLocationsViewController {
 extension UserLocationsViewController: UITableViewDelegate {
 
 }
+
 
 extension UserLocationsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
