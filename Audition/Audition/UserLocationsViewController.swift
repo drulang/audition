@@ -51,7 +51,8 @@ class UserLocationsViewController: UIViewController {
 
         addLocationButton.setTitle("Add", forState: UIControlState.Normal)
         addLocationButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
-        
+        addLocationButton.addTarget(self, action: #selector(addLocationButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: Config.TableView.cellId)
@@ -73,9 +74,15 @@ class UserLocationsViewController: UIViewController {
     }
 }
 
+extension UserLocationsViewController {
+    func addLocationButtonTapped(sender:UIButton) {
+        log.debug("Adding a new location")
+    }
+}
+
 
 extension UserLocationsViewController: UITableViewDelegate {
-    
+
 }
 
 extension UserLocationsViewController: UITableViewDataSource {
