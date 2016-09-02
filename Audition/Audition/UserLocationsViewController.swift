@@ -11,9 +11,12 @@ import UIKit
 
 private struct Config {
     struct TableView {
-        static let topInset:CGFloat = 55
         static let cellId = "Location Cell"
-        
+    }
+    
+    struct AddLocationButton {
+        static let topInset:CGFloat = 20
+        static let rightInset:CGFloat = 20
     }
 }
 
@@ -24,7 +27,8 @@ class UserLocationsViewController: UIViewController {
     private let user:User
     private var constraintsAdded:Bool = false
     private let tableView:UITableView = UITableView(forAutoLayout: ())
-
+    private let addLocationButton:UIButton = UIButton(forAutoLayout: ())
+    
     //MARK: Constructors
     init(systemCommand:SystemCommandCenter, user:User) {
         self.systemCommand = systemCommand
@@ -42,7 +46,11 @@ class UserLocationsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
 
+        view.addSubview(addLocationButton)
         view.addSubview(tableView)
+
+        addLocationButton.setTitle("Add", forState: UIControlState.Normal)
+        addLocationButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -53,7 +61,12 @@ class UserLocationsViewController: UIViewController {
     
     override func updateViewConstraints() {
         if !constraintsAdded {
-            tableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: Config.TableView.topInset, left: 0, bottom: 0, right: 0))
+            addLocationButton.autoPinEdgeToSuperviewEdge(ALEdge.Top, withInset: Config.AddLocationButton.topInset)
+            addLocationButton.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: Config.AddLocationButton.rightInset)
+    
+            tableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: ALEdge.Top)
+            tableView.autoPinEdge(ALEdge.Top, toEdge: ALEdge.Bottom, ofView: addLocationButton)
+    
             constraintsAdded = true
         }
         super.updateViewConstraints()
