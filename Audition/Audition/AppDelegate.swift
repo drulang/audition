@@ -24,20 +24,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         initializeLogging()
-        
-        //TODO: Note the async nature of this and needing to show a loading screen
-        systemCommandCenter.hqService.retrieveUser(8675309, completion: { (user, error) in
-            self.user = user
-        })
-        
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let rootViewController = UserLocationsViewController()
-        rootViewController.view.backgroundColor = UIColor.grayColor()
-        
-        window?.rootViewController = rootViewController
-        window?.makeKeyAndVisible()
-        
+        //TODO: Note the async nature of this and needing to show a loading screen, and have a more sophisticated way of routing controllers at the top level
+        systemCommandCenter.hqService.retrieveUser(8675309, completion: { (user, error) in
+            self.user = user
+
+            let rootViewController = UserLocationsViewController(systemCommand: self.systemCommandCenter, user: user)
+            
+            rootViewController.view.backgroundColor = UIColor.grayColor()
+            
+            self.window?.rootViewController = rootViewController
+            self.window?.makeKeyAndVisible()
+        })
+
         return true
     }
 

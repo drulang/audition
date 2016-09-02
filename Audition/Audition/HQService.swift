@@ -10,7 +10,7 @@ import Foundation
 
 class HQService {
     
-    func retrieveUser(userId:UInt, completion:(user:User, error:NSError)->Void) {
+    func retrieveUser(userId:UInt, completion:(user:User, error:NSError?)->Void) {
         //TODO: Wire up to some REST API
         let user = User(userId: 8675309)
         
@@ -21,6 +21,8 @@ class HQService {
         user.favoriteEarthLocations = [
             nyc
         ]
+        
+        completion(user: user, error: nil)
     }
     
 }

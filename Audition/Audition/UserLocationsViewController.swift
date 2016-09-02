@@ -10,6 +10,23 @@ import UIKit
 
 class UserLocationsViewController: UIViewController {
 
+    private let systemCommand:SystemCommandCenter
+    private let user:User
+    
+    
+    init(systemCommand:SystemCommandCenter, user:User) {
+        self.systemCommand = systemCommand
+        self.user = user
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    
+    //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -23,9 +40,9 @@ class UserLocationsViewController: UIViewController {
         
         let commandCenter = SystemCommandCenter()
 
-        commandCenter.trackNewLocation("New york, new york", alias: "NYC") { (location:EarthLocation, error:NSError) in
+        //commandCenter.trackNewLocation("New york, new york", alias: "NYC") { (location:EarthLocation, error:NSError) in
             
-        }
+        //}
 
 //        commandCenter.earthService.forwardGeolocateLocation("New york, new york") { (location) in
 //            log.debug("Recieved loc: \(location)")
