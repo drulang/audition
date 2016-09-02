@@ -16,7 +16,9 @@ class UserLocationsViewController: UIViewController {
         
         let userLoc = EarthLocation(latitude: 44, longitude: 30.0)
         
-        IssService().nextOverheadPassPrediction(atLocation: userLoc)
+        IssService().nextOverheadPassPrediction(atLocation: userLoc) { (futureLocation) in
+            log.debug("Received future loc: \(futureLocation)")
+        }
     }
 }
 

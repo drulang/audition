@@ -11,7 +11,7 @@ import Foundation
 
 class IssService {
  
-    func nextOverheadPassPrediction(atLocation location:Location) {
+    func nextOverheadPassPrediction(atLocation location:Location, withCompletion completion: (futureLocation:IssLocationFuture?)->Void) {
 
         let parameters = [
             "lat": location.lat,
@@ -31,8 +31,10 @@ class IssService {
                 if let notifyAPIResponse = response.objectForKey("response") {
                     if let risetime = notifyAPIResponse[0].objectForKey("risetime") {
                         let futureLocation = IssLocationFuture(risetime: risetime.unsignedIntegerValue)
+                        completion(futureLocation: futureLocation)
                     } else {
                         log.debug("Unable to extract a risetime at given \(location)")
+                        completion(futureLocation: nil)
                     }
                 }
                 
