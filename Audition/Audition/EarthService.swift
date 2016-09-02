@@ -20,8 +20,6 @@ class EarthService {
             } else {
                 completion(location: nil)
             }
-
         }
     }
-    
 }

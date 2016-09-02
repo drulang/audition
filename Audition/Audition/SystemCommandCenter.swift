@@ -8,6 +8,12 @@
 
 import Foundation
 
-class SystemCommand {
+/**
+
+ */
+class SystemCommandCenter {
+    let earthService = EarthService()
+    let issService = IssService()
+    let hqService = HQService()
     
 }

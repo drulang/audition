@@ -19,17 +19,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let systemCommandCenter = SystemCommandCenter()
+    var user:User?// TODO: (DL) Rethink this, feels like it might belong in SysCommandCenter
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         initializeLogging()
-
+        
+        //TODO: Note the async nature of this and needing to show a loading screen
+        systemCommandCenter.hqService.retrieveUser(8675309, completion: { (user, error) in
+            self.user = user
+        })
+        
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         let rootViewController = UserLocationsViewController()
         rootViewController.view.backgroundColor = UIColor.grayColor()
         
         window?.rootViewController = rootViewController
-        
         window?.makeKeyAndVisible()
         
         return true
@@ -60,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 extension AppDelegate {
-
+    
     /// Setup system logging facility
     func initializeLogging() {
         log.addDestination(ConsoleDestination())
