@@ -10,7 +10,7 @@ import Alamofire
 import CoreLocation
 import Foundation
 
-struct IssServiceConfig {
+private struct IssServiceConfig {
     static let host = "http://api.open-notify.org"
     
     struct Paths {
