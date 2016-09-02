@@ -36,19 +36,21 @@ class IssService {
             .responseJSON
             { response in switch response.result {
             case .Success(let JSON):
-                log.info("Successfully predicted nextoverhead pass of ISS")
-
                 let response = JSON as! NSDictionary
+                let notifyAPIResponse = response.objectForKey("response")
+                var futureLocation:IssLocationFuture?
                 
-                if let notifyAPIResponse = response.objectForKey("response") {
-                    if let risetime = notifyAPIResponse[0].objectForKey("risetime") {
-                        let futureLocation = IssLocationFuture(risetime: NSTimeInterval(risetime.unsignedIntegerValue))
-                        completion(futureLocation: futureLocation, error:nil)
+                if  notifyAPIResponse != nil && notifyAPIResponse!.count > 0 {
+                    if let risetime = notifyAPIResponse![0].objectForKey("risetime") {
+                        futureLocation = IssLocationFuture(risetime: NSTimeInterval(risetime.unsignedIntegerValue))
+                        log.info("Successfully predicted nextoverhead pass of ISS")
                     } else {
                         log.debug("Unable to extract a risetime at given \(location)")
-                        completion(futureLocation: nil, error:nil)
                     }
                 }
+                
+                completion(futureLocation: futureLocation, error:nil)
+                
             case .Failure(let error):
                 print("Request failed with error: \(error)")
                 }

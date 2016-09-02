@@ -87,18 +87,22 @@ extension UserLocationsViewController {
     func updateUserLocationFavorites() {
         log.info("Updating user's location favorites")
 
-        for eLoc in user.favoriteEarthLocations {
-            systemCommand.issService.nextOverheadPassPrediction(onEarth: eLoc, withCompletion: { (futureLocation, error) in
-                eLoc.issLocationInTheFuture = futureLocation
-                
-                let index = self.user.favoriteEarthLocations.indexOf({ return $0 === eLoc })
-                
-                if index != nil {
-                    let indexPath = NSIndexPath(forRow: index!, inSection: 0)
-                    self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                }
-            })
+        for earthLocation in user.favoriteEarthLocations {
+            updateUserLocationFavorite(earthLocation)
         }
+    }
+    
+    func updateUserLocationFavorite(earthLocation:EarthLocation) {
+        systemCommand.issService.nextOverheadPassPrediction(onEarth: earthLocation, withCompletion: { (futureLocation, error) in
+            earthLocation.issLocationInTheFuture = futureLocation
+            
+            let index = self.user.favoriteEarthLocations.indexOf({ return $0 === earthLocation })
+            
+            if index != nil {
+                let indexPath = NSIndexPath(forRow: index!, inSection: 0)
+                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            }
+        })
     }
 }
 
@@ -135,6 +139,8 @@ extension UserLocationsViewController: NewLocationViewControllerDelegate {
     
     func newLocationViewController(controller: NewLocationViewController, didCreateNewEarthLocation location: EarthLocation) {
         self.user.favoriteEarthLocations.append(location)
+        
+        
         tableView.reloadData()
     }
 }
