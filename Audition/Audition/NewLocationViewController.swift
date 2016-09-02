@@ -38,16 +38,23 @@ class NewLocationViewController: UIViewController {
         locationNameTextField.backgroundColor = UIColor.whiteColor()
         
         saveButton.setTitle("Save", forState: UIControlState.Normal)
-        
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
+    
         cancelButton.setTitle("X", forState: UIControlState.Normal)
-        
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
+
         view.addSubview(self.locationNameTextField)
         view.addSubview(self.saveButton)
         view.addSubview(self.cancelButton)
         
         updateViewConstraints()
     }
-    
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        locationNameTextField.becomeFirstResponder()
+    }
+
     override func updateViewConstraints() {
         if !constraintsAdded {
             //TODO: (DL) Remove magic no.
@@ -65,5 +72,28 @@ class NewLocationViewController: UIViewController {
         }
         super.updateViewConstraints()
     }
+}
+
+extension NewLocationViewController {
+    func close() {
+        locationNameTextField.resignFirstResponder()
+        
+        UIView.animateWithDuration(0.1, animations: {
+            self.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height)
+        }) { (finished) in
+            self.view.removeFromSuperview()
+            self.removeFromParentViewController()
+        }
+    }
+}
+
+extension NewLocationViewController {
     
+    func saveButtonTapped() {
+        close()
+    }
+    
+    func cancelButtonTapped() {
+        close()
+    }
 }
