@@ -24,7 +24,7 @@ class HQService {
         //TODO: user should be optional
         //NOTE: Wire up to some REST API/LocalDB/Space station
         let user = User(userId: userId)
-
+        user.name = "Chief Bob"
         let nycCoordinate = Coordinate(latitude: 40.713054, longitude: -74.007227)
         let nyc = EarthLocation(coordinate: nycCoordinate)
         nyc.name = "New York, New York"
