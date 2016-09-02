@@ -11,9 +11,9 @@ import Foundation
 
 class EarthService {
 
-    func forwardGeolocateLocation(locationName:NSString, withCompletion completion:(location:CLLocationCoordinate2D?)->Void) {
+    func forwardGeolocateLocation(locationName:String, withCompletion completion:(location:CLLocationCoordinate2D?)->Void) {
         let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString("New york, new york") { (placemarks, error) in
+        geocoder.geocodeAddressString(locationName) { (placemarks, error) in
             //TODO: (DL) Error handling, logging
             if let location = placemarks?.first?.location?.coordinate {
                 completion(location: location)
