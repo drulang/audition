@@ -9,8 +9,22 @@
 import CoreLocation
 import Foundation
 
+/**
+ ## Mother Earth
+ 
+ May she live forever. This class provides GeoLocation services including forward/reverse geoencoding.
+ */
 class EarthService {
 
+    /**
+     Forward geolocate a location on earth.
+     
+     - Parameter String: A name of a location.  It can be a proper address or more informal
+        - NYC
+        - Greensboro, NC
+        - 8329 Tom Cruise Drive
+     - Parameter Closure: This will be called after the encoding is complete
+     */
     func forwardGeolocateLocation(locationName:String, withCompletion completion:(coordinate:Coordinate?, name:String?, error:NSError?)->Void) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(locationName) { (placemarks, error) in

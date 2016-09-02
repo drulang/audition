@@ -13,7 +13,7 @@ class User {
     var name:String?
     var favoriteEarthLocations:[EarthLocation] = []
     
-    
+
     init(userId uid:UInt) {
         userId = uid
     }

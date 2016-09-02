@@ -35,6 +35,11 @@ private struct IssServiceConfig {
 }
 
 
+/**
+ International Space Stationg
+ 
+ Provides communication with ISS
+ */
 class IssService {
     
     func nextOverheadPassPrediction(onEarth location:EarthLocation, withCompletion completion: (futureLocation:IssLocationFuture?, error:NSError?)->Void) {
@@ -69,10 +74,7 @@ class IssService {
                 }
         }
     }
-    
-    /**
-     Will set the
-     */
+
     func determineNextOverheadPassPredictions(atEarthLocations locations:[EarthLocation], withCompletion completion: (futureLocation:IssLocationFuture?, error:NSError?) -> Void) {
         for earthLocation in locations {
             nextOverheadPassPrediction(onEarth: earthLocation, withCompletion: completion)

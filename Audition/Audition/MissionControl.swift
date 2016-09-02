@@ -9,11 +9,23 @@
 import Foundation
 
 /**
+## Mission Control
+ 
+Provides the necessary services to run the CUBWO Interspace System.
+ 
+### Subsystems
 
+- Earth communication and dat processing
+- ISS communication and location processing
+- Head Quarters communication and storage pocessing
+ 
+## Encapsulation
+
+This class also provides encapsulations that require the coordiation
+ and interaction between various subssystems
  */
 class MissionControl {
     let earthService = EarthService()
     let issService = IssService()
     let hqService = HQService()
-    //TODO: Note about puttting abstractions in here that involve multiple services
 }
