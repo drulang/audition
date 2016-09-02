@@ -9,7 +9,11 @@ import CoreLocation
 import Foundation
 
 class EarthLocation {
-    var location:CLLocationCoordinate2D?
+    let coordinate:CLLocationCoordinate2D
     var name:String?
     var alias:String?
+    
+    init(coordinate:CLLocationCoordinate2D) {
+        self.coordinate = coordinate
+    }
 }

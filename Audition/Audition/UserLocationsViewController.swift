@@ -86,7 +86,7 @@ extension UserLocationsViewController {
         self.view.addSubview(newLocationController.view)
         
         //TODO: (DL) COmment, move magic
-        newLocationController.view.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: 350)
+        newLocationController.view.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: 450)
         
         UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions(), animations: {
             newLocationController.view.frame = CGRect(x:0, y:0, width: newLocationController.view.frame.width, height: newLocationController.view.frame.height)
@@ -104,6 +104,7 @@ extension UserLocationsViewController: NewLocationViewControllerDelegate {
         tableView.reloadData()
     }
 }
+
 
 extension UserLocationsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

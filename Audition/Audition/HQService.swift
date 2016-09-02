@@ -14,9 +14,9 @@ class HQService {
         //TODO: Wire up to some REST API
         let user = User(userId: 8675309)
         
-        let nyc = EarthLocation()
+        let nycCoordinate = CLLocationCoordinate2D(latitude: 40.713054, longitude: -74.007227)
+        let nyc = EarthLocation(coordinate: nycCoordinate)
         nyc.alias = "nyc"
-        nyc.location = CLLocationCoordinate2D(latitude: 40.713054, longitude: -74.007227)
         
         user.favoriteEarthLocations = [
             nyc

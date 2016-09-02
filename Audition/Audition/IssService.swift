@@ -25,10 +25,10 @@ private struct IssServiceConfig {
 
 class IssService {
     
-    func nextOverheadPassPrediction(atLocation location:CLLocationCoordinate2D, withCompletion completion: (futureLocation:IssLocationFuture?)->Void) {
+    func nextOverheadPassPrediction(onEarth location:EarthLocation, withCompletion completion: (futureLocation:IssLocationFuture?)->Void) {
         let parameters = [
-            "lat": location.latitude,
-            "lon": location.longitude,
+            "lat": location.coordinate.latitude,
+            "lon": location.coordinate.longitude,
             "n": 1
         ]
         
@@ -58,6 +58,5 @@ class IssService {
         }
         
     }
-    
-    
+
 }
