@@ -139,8 +139,7 @@ extension UserLocationsViewController: NewLocationViewControllerDelegate {
     
     func newLocationViewController(controller: NewLocationViewController, didCreateNewEarthLocation location: EarthLocation) {
         self.user.favoriteEarthLocations.append(location)
-        
-        
+        updateUserLocationFavorite(location)
         tableView.reloadData()
     }
 }
@@ -165,7 +164,7 @@ extension UserLocationsViewController: UITableViewDataSource {
         
         if let issDate = location.issLocationInTheFuture?.risetimeDate {
             let dateFormatted = dateFormatter.stringFromDate(issDate)
-            cell.textLabel?.text = "\(location.alias) - \(dateFormatted)"
+            cell.textLabel?.text = "\(location.name) - \(dateFormatted)"
         } else {
             cell.textLabel?.text = location.alias
         }

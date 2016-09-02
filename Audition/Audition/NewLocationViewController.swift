@@ -113,20 +113,23 @@ extension NewLocationViewController {
         setInterfaceLoading()
 
         if let locationText = locationNameTextField.text {
-            systemCommand.earthService.forwardGeolocateLocation(locationText) { (coordinate) in
+            systemCommand.earthService.forwardGeolocateLocation(locationText, withCompletion: { (coordinate, name, error) in
                 log.info("Created new location: \(coordinate)")
                 
                 if let _ = self.delegate {
                     if let _ = coordinate {
                         let earthLocation:EarthLocation = EarthLocation(coordinate: coordinate!)
-                        earthLocation.alias = "temp"
+                        earthLocation.name = name
                         self.delegate!.newLocationViewController(self, didCreateNewEarthLocation: earthLocation)
                     }
                 }
                 self.setInterfaceNormal()
                 self.close()
-            }
-        } else {
+            })
+        }
+        
+        
+        else {
             log.debug("No text")
             setInterfaceNormal()
         }

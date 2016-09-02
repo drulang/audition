@@ -15,7 +15,8 @@ class HQService {
 
         let nycCoordinate = Coordinate(latitude: 40.713054, longitude: -74.007227)
         let nyc = EarthLocation(coordinate: nycCoordinate)
-        nyc.alias = "nyc"
+        nyc.name = "New York, New York"
+        nyc.alias = "NYC"
         
         user.favoriteEarthLocations = [
             nyc
