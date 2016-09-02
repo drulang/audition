@@ -47,13 +47,13 @@ class UserLocationsViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = Apperance.Palette.primaryColor
 
         view.addSubview(addLocationButton)
         view.addSubview(tableView)
 
         addLocationButton.setTitle("Add", forState: UIControlState.Normal)
-        addLocationButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        addLocationButton.setTitleColor(Apperance.Palette.accentColor, forState: UIControlState.Normal)
         addLocationButton.addTarget(self, action: #selector(addLocationButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
 
         tableView.delegate = self

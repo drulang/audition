@@ -40,12 +40,15 @@ class NewLocationViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.lightGrayColor()
+        view.backgroundColor = Apperance.Palette.primaryColor
         
         locationNameTextField.backgroundColor = UIColor.whiteColor()
-        locationNameTextField.placeholder = "Enter a new location"
+        locationNameTextField.placeholder = "New location..."
+        locationNameTextField.font = Apperance.Font.textfieldJumboFont
+        locationNameTextField.tintColor = Apperance.Palette.accentColor
         
         saveButton.setTitle("Save", forState: UIControlState.Normal)
+        saveButton.setTitleColor(Apperance.Palette.accentColor, forState: UIControlState.Normal)
         saveButton.addTarget(self, action: #selector(saveButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
     
         cancelButton.setTitle("X", forState: UIControlState.Normal)
@@ -66,8 +69,8 @@ class NewLocationViewController: UIViewController {
     override func updateViewConstraints() {
         if !constraintsAdded {
             //TODO: (DL) Remove magic no.
-            locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: 30)
-            locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: 30)
+            locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: 5)
+            locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: 5)
             locationNameTextField.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
            
             saveButton.autoPinEdgeToSuperviewEdge(ALEdge.Bottom, withInset: 50)
