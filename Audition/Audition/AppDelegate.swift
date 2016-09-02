@@ -31,9 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.user = user
 
             let rootViewController = UserLocationsViewController(systemCommand: self.systemCommandCenter, user: user)
-            
-            rootViewController.view.backgroundColor = UIColor.grayColor()
-            
+
             self.window?.rootViewController = rootViewController
             self.window?.makeKeyAndVisible()
         })

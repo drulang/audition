@@ -10,5 +10,6 @@ import Foundation
 
 class EarthLocation {
     var location:CLLocationCoordinate2D?
+    var name:String?
     var alias:String?
 }

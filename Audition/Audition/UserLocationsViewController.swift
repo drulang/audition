@@ -5,15 +5,18 @@
 //  Created by Dru Lang on 9/1/16.
 //  Copyright © 2016 Dru Lang. All rights reserved.
 //
-
+import PureLayout
 import UIKit
 
 class UserLocationsViewController: UIViewController {
-
+    static let locationCellId = "Location Cell"
+    
     private let systemCommand:SystemCommandCenter
     private let user:User
-    
-    
+    private var constraintsAdded:Bool = false
+    private let tableView:UITableView = UITableView(forAutoLayout: ())
+
+    //MARK: Constructors
     init(systemCommand:SystemCommandCenter, user:User) {
         self.systemCommand = systemCommand
         self.user = user
@@ -25,28 +28,47 @@ class UserLocationsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-//        let userLoc = EarthLocation(latitude: 44, longitude: 30.0)
-//        
-//        IssService().nextOverheadPassPrediction(atLocation: userLoc) { (futureLocation) in
-//            log.debug("Received future loc: \(futureLocation)")
-//        }
-        
-        
-        let commandCenter = SystemCommandCenter()
+        view.backgroundColor = UIColor.whiteColor()
 
-        //commandCenter.trackNewLocation("New york, new york", alias: "NYC") { (location:EarthLocation, error:NSError) in
-            
-        //}
+        view.addSubview(tableView)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: UserLocationsViewController.locationCellId)
+        
+        updateViewConstraints()
+    }
+    
+    override func updateViewConstraints() {
+        if !constraintsAdded {
+            tableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
+            constraintsAdded = true
+        }
+        super.updateViewConstraints()
+    }
+}
 
-//        commandCenter.earthService.forwardGeolocateLocation("New york, new york") { (location) in
-//            log.debug("Recieved loc: \(location)")
-//        };
+
+extension UserLocationsViewController: UITableViewDelegate {
+    
+}
+
+extension UserLocationsViewController: UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.user.favoriteEarthLocations.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(UserLocationsViewController.locationCellId, forIndexPath: indexPath)
+        
+        let location = self.user.favoriteEarthLocations[indexPath.row]
+
+        cell.textLabel?.text = location.alias
+
+        return cell
         
     }
 }
