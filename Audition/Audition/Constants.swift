@@ -33,5 +33,6 @@ struct Apperance {
 struct  ImageName {
     struct Icon {
         static let addLocationIcon = "icon-add-location"
+        static let closeIcon = "icon-close"
     }
 }

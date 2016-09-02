@@ -83,14 +83,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		715D75B61D79AA2700FC0BCF /* Misc */ = {
-			isa = PBXGroup;
-			children = (
-				715D75B71D79AA3700FC0BCF /* Constants.swift */,
-			);
-			name = Misc;
-			sourceTree = "<group>";
-		};
 		715D75BB1D79E3B100FC0BCF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,7 +119,6 @@
 				7168F1B81D7848ED0079FC1F /* Controller */,
 				71D135E41D78EF500087F396 /* Services */,
 				715D75BB1D79E3B100FC0BCF /* Extensions */,
-				715D75B61D79AA2700FC0BCF /* Misc */,
 				7168F1B41D7848C60079FC1F /* Supporting Files */,
 			);
 			path = Audition;
@@ -146,6 +137,7 @@
 		7168F1B51D7848DA0079FC1F /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				715D75B71D79AA3700FC0BCF /* Constants.swift */,
 				7168F1A21D78480D0079FC1F /* AppDelegate.swift */,
 			);
 			name = Main;

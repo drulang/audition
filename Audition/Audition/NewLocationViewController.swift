@@ -51,9 +51,9 @@ class NewLocationViewController: UIViewController {
         saveButton.setTitleColor(Apperance.Palette.accentColor, forState: UIControlState.Normal)
         saveButton.addTarget(self, action: #selector(saveButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
     
-        cancelButton.setTitle("X", forState: UIControlState.Normal)
+        cancelButton.setImage(UIImage.imageTemplate(imageTemplateWithNamed: ImageName.Icon.closeIcon), forState: UIControlState.Normal)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
-        cancelButton.setTitleColor(Apperance.Palette.Text.secondaryTextColor, forState: UIControlState.Normal)
+        cancelButton.tintColor = Apperance.Palette.accentColor
         
         view.addSubview(self.locationNameTextField)
         view.addSubview(self.saveButton)
@@ -70,15 +70,18 @@ class NewLocationViewController: UIViewController {
     override func updateViewConstraints() {
         if !constraintsAdded {
             //TODO: (DL) Remove magic no.
+            let hInset:CGFloat = 20
+            
             locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: 5)
             locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: 5)
             locationNameTextField.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
            
             saveButton.autoPinEdgeToSuperviewEdge(ALEdge.Bottom, withInset: 50)
-            saveButton.autoPinEdge(ALEdge.Right, toEdge: ALEdge.Right, ofView: locationNameTextField)
-            
-            cancelButton.autoPinEdgeToSuperviewEdge(ALEdge.Top, withInset: 20)
-            cancelButton.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: 20)
+            saveButton.autoPinEdge(ALEdge.Right, toEdge: ALEdge.Right, ofView: locationNameTextField, withOffset: -hInset)
+
+            cancelButton.autoPinEdgeToSuperviewEdge(ALEdge.Top, withInset: 30)
+            cancelButton.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: hInset)
+            cancelButton.autoSetDimensionsToSize(CGSize(width: 25, height: 25))
             
             constraintsAdded = true
         }
