@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let missionControl = MissionControl()
+    // Use dependency injection
+    private let missionControl = MissionControl()
+    
     var user:User?// TODO: (DL) Rethink this, feels like it might belong in SysCommandCenter
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

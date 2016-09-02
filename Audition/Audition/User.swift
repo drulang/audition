@@ -10,6 +10,7 @@ import Foundation
 
 class User {
     let userId:UInt
+    var name:String?
     var favoriteEarthLocations:[EarthLocation] = []
     
     

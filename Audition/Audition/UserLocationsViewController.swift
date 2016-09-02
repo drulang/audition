@@ -14,9 +14,9 @@ private struct Config {
         static let cellId = "Location Cell"
     }
 
-    struct AddLocationButton {
-        static let topInset:CGFloat = 20
-        static let rightInset:CGFloat = 20
+    struct ToolBar {
+        static let hInset:CGFloat = 20
+        static let height:CGFloat = 65
     }
 }
 
@@ -26,9 +26,11 @@ class UserLocationsViewController: UIViewController {
     private let missionControl:MissionControl
     private let user:User
     private var constraintsAdded:Bool = false
+    private let welcomeLabel:UILabel = UILabel(forAutoLayout: ())
     private let tableView:UITableView = UITableView(forAutoLayout: ())
     private let addLocationButton:UIButton = UIButton(forAutoLayout: ())
-
+    private let toolBar = UIView(forAutoLayout: ())
+    
     //MARK: Constructors
     init(missionControl:MissionControl, user:User) {
         self.missionControl = missionControl
@@ -50,12 +52,27 @@ class UserLocationsViewController: UIViewController {
         view.backgroundColor = Apperance.Palette.primaryColor
         
         updateUserLocationFavorites()  // Kick this off ASAP so user doesn't have to wait too long for data
+
+        toolBar.addSubview(welcomeLabel)
+        toolBar.addSubview(addLocationButton)
         
-        view.addSubview(addLocationButton)
+        view.addSubview(toolBar)
         view.addSubview(tableView)
 
-        addLocationButton.setTitle("Add", forState: UIControlState.Normal)
-        addLocationButton.setTitleColor(Apperance.Palette.accentColor, forState: UIControlState.Normal)
+        if let name = user.name {
+            welcomeLabel.text = "Welcome, \(name)"
+        } else {
+            welcomeLabel.text = "Welcome, cadet"
+        }
+        
+        welcomeLabel.textColor = Apperance.Palette.Text.secondaryTextColor
+        welcomeLabel.font = UIFont(name: Apperance.Font.name, size: 16)
+        
+        let inset:CGFloat = 5
+        addLocationButton.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+        addLocationButton.setImage(UIImage.imageTemplate(imageTemplateWithNamed: ImageName.Icon.addLocationIcon), forState: UIControlState.Normal)
+        addLocationButton.tintColor = Apperance.Palette.accentColor
+        addLocationButton.titleLabel?.font = Apperance.Font.buttonFont
         addLocationButton.addTarget(self, action: #selector(addLocationButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
 
         tableView.delegate = self
@@ -67,11 +84,21 @@ class UserLocationsViewController: UIViewController {
     
     override func updateViewConstraints() {
         if !constraintsAdded {
-            addLocationButton.autoPinEdgeToSuperviewEdge(ALEdge.Top, withInset: Config.AddLocationButton.topInset)
-            addLocationButton.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: Config.AddLocationButton.rightInset)
-    
+            toolBar.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: ALEdge.Bottom)
+            toolBar.autoSetDimension(ALDimension.Height, toSize: Config.ToolBar.height)
+
+            toolBar.backgroundColor = Apperance.Palette.secondaryColor
+
+            welcomeLabel.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: Config.ToolBar.hInset)
+            welcomeLabel.autoAlignAxis(ALAxis.Horizontal, toSameAxisOfView: addLocationButton)
+
+            addLocationButton.autoPinEdgeToSuperviewEdge(ALEdge.Top, withInset: Config.ToolBar.hInset)
+            addLocationButton.autoPinEdgeToSuperviewEdge(ALEdge.Bottom, withInset: Config.ToolBar.hInset / 2.0)
+            addLocationButton.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: Config.ToolBar.hInset - (Config.ToolBar.hInset / 4.0))
+            addLocationButton.autoConstrainAttribute(ALAttribute.Width, toAttribute: ALAttribute.Height, ofView: addLocationButton)
+            
             tableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: ALEdge.Top)
-            tableView.autoPinEdge(ALEdge.Top, toEdge: ALEdge.Bottom, ofView: addLocationButton)
+            tableView.autoPinEdge(ALEdge.Top, toEdge: ALEdge.Bottom, ofView: toolBar)
     
             constraintsAdded = true
         }
@@ -91,7 +118,7 @@ extension UserLocationsViewController {
             updateUserLocationFavorite(earthLocation)
         }
     }
-    
+
     func updateUserLocationFavorite(earthLocation:EarthLocation) {
         missionControl.issService.nextOverheadPassPrediction(onEarth: earthLocation, withCompletion: { (futureLocation, error) in
             earthLocation.issLocationInTheFuture = futureLocation

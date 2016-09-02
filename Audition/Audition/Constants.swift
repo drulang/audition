@@ -26,5 +26,12 @@ struct Apperance {
         static let titleFont = UIFont(name: Font.name, size: 19)
         static let subtitleFont = UIFont(name: Font.name, size: 17)
         static let textfieldJumboFont = UIFont(name: Font.name, size: 40)
+        static let buttonFont = UIFont(name: Font.name, size: 16)
+    }
+}
+
+struct  ImageName {
+    struct Icon {
+        static let addLocationIcon = "icon-add-location"
     }
 }
