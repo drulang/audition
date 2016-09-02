@@ -24,7 +24,7 @@ private struct IssServiceConfig {
 
 class IssService {
     
-    func nextOverheadPassPrediction(onEarth location:EarthLocation, withCompletion completion: (futureLocation:IssLocationFuture?)->Void) {
+    func nextOverheadPassPrediction(onEarth location:EarthLocation, withCompletion completion: (futureLocation:IssLocationFuture?, error:NSError?)->Void) {
         let parameters = [
             "lat": location.coordinate.latitude,
             "lon": location.coordinate.longitude,
@@ -43,19 +43,25 @@ class IssService {
                 if let notifyAPIResponse = response.objectForKey("response") {
                     if let risetime = notifyAPIResponse[0].objectForKey("risetime") {
                         let futureLocation = IssLocationFuture(risetime: NSTimeInterval(risetime.unsignedIntegerValue))
-                        completion(futureLocation: futureLocation)
+                        completion(futureLocation: futureLocation, error:nil)
                     } else {
                         log.debug("Unable to extract a risetime at given \(location)")
-                        completion(futureLocation: nil)
+                        completion(futureLocation: nil, error:nil)
                     }
                 }
-                
-
             case .Failure(let error):
                 print("Request failed with error: \(error)")
                 }
         }
-        
+    }
+    
+    /**
+     Will set the
+     */
+    func determineNextOverheadPassPredictions(atEarthLocations locations:[EarthLocation], withCompletion completion: (futureLocation:IssLocationFuture?, error:NSError?) -> Void) {
+        for earthLocation in locations {
+            nextOverheadPassPrediction(onEarth: earthLocation, withCompletion: completion)
+        }
     }
 
 }

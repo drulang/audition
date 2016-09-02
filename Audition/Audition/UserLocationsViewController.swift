@@ -33,7 +33,7 @@ class UserLocationsViewController: UIViewController {
     init(systemCommand:SystemCommandCenter, user:User) {
         self.systemCommand = systemCommand
         self.user = user
-        
+
         dateFormatter.dateStyle = .ShortStyle
         dateFormatter.timeStyle = .ShortStyle
     
@@ -48,7 +48,9 @@ class UserLocationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Apperance.Palette.primaryColor
-
+        
+        updateUserLocationFavorites()  // Kick this off ASAP so user doesn't have to wait too long for data
+        
         view.addSubview(addLocationButton)
         view.addSubview(tableView)
 
@@ -77,7 +79,32 @@ class UserLocationsViewController: UIViewController {
     }
 }
 
+/**
+ Helpers
+ */
+extension UserLocationsViewController {
+    
+    func updateUserLocationFavorites() {
+        log.info("Updating user's location favorites")
 
+        for eLoc in user.favoriteEarthLocations {
+            systemCommand.issService.nextOverheadPassPrediction(onEarth: eLoc, withCompletion: { (futureLocation, error) in
+                eLoc.issLocationInTheFuture = futureLocation
+                
+                let index = self.user.favoriteEarthLocations.indexOf({ return $0 === eLoc })
+                
+                if index != nil {
+                    let indexPath = NSIndexPath(forRow: index!, inSection: 0)
+                    self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                }
+            })
+        }
+    }
+}
+
+/**
+ Target/Action
+ */
 extension UserLocationsViewController {
     func addLocationButtonTapped(sender:UIButton) {
         log.debug("Adding a new location")
@@ -98,10 +125,12 @@ extension UserLocationsViewController {
             
         }
     }
-
 }
 
 
+/**
+ NewLocationVieewControllerDelegate
+ */
 extension UserLocationsViewController: NewLocationViewControllerDelegate {
     
     func newLocationViewController(controller: NewLocationViewController, didCreateNewEarthLocation location: EarthLocation) {

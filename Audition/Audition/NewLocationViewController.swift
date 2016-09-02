@@ -53,7 +53,8 @@ class NewLocationViewController: UIViewController {
     
         cancelButton.setTitle("X", forState: UIControlState.Normal)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
-
+        cancelButton.setTitleColor(Apperance.Palette.Text.secondaryTextColor, forState: UIControlState.Normal)
+        
         view.addSubview(self.locationNameTextField)
         view.addSubview(self.saveButton)
         view.addSubview(self.cancelButton)
