@@ -60,7 +60,7 @@ class UserLocationsViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: Config.TableView.cellId)
+        tableView.registerClass(LocationDetailTableViewCell.self, forCellReuseIdentifier: Config.TableView.cellId)
         
         updateViewConstraints()
     }
@@ -147,7 +147,7 @@ extension UserLocationsViewController: NewLocationViewControllerDelegate {
 
 extension UserLocationsViewController :UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 65
+        return 100
     }
 }
 
@@ -158,13 +158,22 @@ extension UserLocationsViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Config.TableView.cellId, forIndexPath: indexPath)
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier(Config.TableView.cellId, forIndexPath: indexPath) as! LocationDetailTableViewCell
+
         let location = self.user.favoriteEarthLocations[indexPath.row]
         
+        // Set name
+        if let locationName = location.name  {
+            cell.locationNameLabel.text = locationName
+        } else {
+            cell.locationNameLabel.text = "Black hole"
+        }
+        
+        // Set date
         if let issDate = location.issLocationInTheFuture?.risetimeDate {
             let dateFormatted = dateFormatter.stringFromDate(issDate)
-            cell.textLabel?.text = "\(location.name) - \(dateFormatted)"
+
+            cell.locationDetailLabel.text = dateFormatted
         } else {
             cell.textLabel?.text = location.alias
         }
