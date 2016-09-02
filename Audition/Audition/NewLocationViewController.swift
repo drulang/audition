@@ -23,6 +23,7 @@ class NewLocationViewController: UIViewController {
     private let locationNameTextField:UITextField = UITextField(forAutoLayout: ())
     private let saveButton:UIButton = UIButton(forAutoLayout: ())
     private let cancelButton:UIButton = UIButton(forAutoLayout: ())
+    private let activityIndictaor:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
     
     var delegate:NewLocationViewControllerDelegate?
 
@@ -42,6 +43,10 @@ class NewLocationViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Apperance.Palette.primaryColor
         
+        activityIndictaor.translatesAutoresizingMaskIntoConstraints = false
+        activityIndictaor.hidesWhenStopped = true
+        activityIndictaor.color = Apperance.Palette.accentColor
+        
         locationNameTextField.backgroundColor = UIColor.whiteColor()
         locationNameTextField.placeholder = "New location..."
         locationNameTextField.font = Apperance.Font.textfieldJumboFont
@@ -58,6 +63,7 @@ class NewLocationViewController: UIViewController {
         view.addSubview(self.locationNameTextField)
         view.addSubview(self.saveButton)
         view.addSubview(self.cancelButton)
+        view.addSubview(activityIndictaor)
         
         updateViewConstraints()
     }
@@ -71,6 +77,9 @@ class NewLocationViewController: UIViewController {
         if !constraintsAdded {
             //TODO: (DL) Remove magic no.
             let hInset:CGFloat = 20
+            
+            activityIndictaor.autoAlignAxisToSuperviewAxis(ALAxis.Vertical)
+            activityIndictaor.autoConstrainAttribute(ALAttribute.Bottom, toAttribute: ALAttribute.Horizontal, ofView: self.view, withOffset: -25)
             
             locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: 5)
             locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: 5)
@@ -102,11 +111,15 @@ extension NewLocationViewController {
     }
     
     func setInterfaceLoading() {
-        
+        activityIndictaor.startAnimating()
+        locationNameTextField.enabled = false
+        saveButton.enabled = true
     }
     
     func setInterfaceNormal() {
-        
+        locationNameTextField.enabled = true
+        saveButton.enabled = true
+        activityIndictaor.stopAnimating()
     }
 }
 
@@ -118,7 +131,7 @@ extension NewLocationViewController {
         if let locationText = locationNameTextField.text {
             missionControl.earthService.forwardGeolocateLocation(locationText, withCompletion: { (coordinate, name, error) in
                 log.info("Created new location: \(coordinate)")
-                
+
                 if let _ = self.delegate {
                     if let _ = coordinate {
                         let earthLocation:EarthLocation = EarthLocation(coordinate: coordinate!)
@@ -129,15 +142,12 @@ extension NewLocationViewController {
                 self.setInterfaceNormal()
                 self.close()
             })
-        }
-        
-        
-        else {
+        } else {
             log.debug("No text")
             setInterfaceNormal()
         }
     }
-    
+
     func cancelButtonTapped() {
         close()
     }
