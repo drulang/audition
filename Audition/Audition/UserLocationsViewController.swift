@@ -23,7 +23,6 @@ private struct Config {
 
 class UserLocationsViewController: UIViewController {
     private let dateFormatter = NSDateFormatter()
-
     private let systemCommand:SystemCommandCenter
     private let user:User
     private var constraintsAdded:Bool = false

@@ -7,7 +7,6 @@
 //
 import Alamofire
 
-import CoreLocation
 import Foundation
 
 private struct IssServiceConfig {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		715D75B31D7919B600FC0BCF /* NewLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715D75B21D7919B600FC0BCF /* NewLocationViewController.swift */; };
+		715D75B51D79A8FF00FC0BCF /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715D75B41D79A8FF00FC0BCF /* Coordinate.swift */; };
 		7168F1A31D78480D0079FC1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168F1A21D78480D0079FC1F /* AppDelegate.swift */; };
 		7168F1A51D78480D0079FC1F /* UserLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168F1A41D78480D0079FC1F /* UserLocationsViewController.swift */; };
 		7168F1AA1D78480D0079FC1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7168F1A91D78480D0079FC1F /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		715D75B21D7919B600FC0BCF /* NewLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewLocationViewController.swift; sourceTree = "<group>"; };
+		715D75B41D79A8FF00FC0BCF /* Coordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		7168F19F1D78480D0079FC1F /* Audition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Audition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7168F1A21D78480D0079FC1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7168F1A41D78480D0079FC1F /* UserLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationsViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				71D135F21D78F0520087F396 /* EarthLocation.swift */,
 				71D135F41D78F05A0087F396 /* IssLocation.swift */,
+				715D75B41D79A8FF00FC0BCF /* Coordinate.swift */,
 			);
 			name = Location;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				7168F1A51D78480D0079FC1F /* UserLocationsViewController.swift in Sources */,
 				7168F1A31D78480D0079FC1F /* AppDelegate.swift in Sources */,
 				71D135EA1D78EFE90087F396 /* HQService.swift in Sources */,
+				715D75B51D79A8FF00FC0BCF /* Coordinate.swift in Sources */,
 				71D135EC1D78EFFD0087F396 /* SystemCommandCenter.swift in Sources */,
 				71D135E81D78EF840087F396 /* IssService.swift in Sources */,
 				71D135EE1D78F02B0087F396 /* User.swift in Sources */,

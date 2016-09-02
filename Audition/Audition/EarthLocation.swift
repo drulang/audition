@@ -5,17 +5,16 @@
 //  Created by Dru Lang on 9/1/16.
 //  Copyright © 2016 Dru Lang. All rights reserved.
 //
-import CoreLocation
 import Foundation
 
 class EarthLocation {
-    let coordinate:CLLocationCoordinate2D
+    let coordinate:Coordinate
     var name:String?
     var alias:String?
     
     var issLocationInTheFuture:IssLocationFuture?
     
-    init(coordinate:CLLocationCoordinate2D) {
+    init(coordinate:Coordinate) {
         self.coordinate = coordinate
     }
 }
