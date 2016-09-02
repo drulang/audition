@@ -43,7 +43,7 @@ class IssService {
                 
                 if let notifyAPIResponse = response.objectForKey("response") {
                     if let risetime = notifyAPIResponse[0].objectForKey("risetime") {
-                        let futureLocation = IssLocationFuture(risetime: risetime.unsignedIntegerValue)
+                        let futureLocation = IssLocationFuture(risetime: NSTimeInterval(risetime.unsignedIntegerValue))
                         completion(futureLocation: futureLocation)
                     } else {
                         log.debug("Unable to extract a risetime at given \(location)")

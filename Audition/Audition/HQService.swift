@@ -16,6 +16,7 @@ class HQService {
         
         let nycCoordinate = CLLocationCoordinate2D(latitude: 40.713054, longitude: -74.007227)
         let nyc = EarthLocation(coordinate: nycCoordinate)
+        nyc.issLocationInTheFuture = IssLocationFuture(risetime: 1472787130)
         nyc.alias = "nyc"
         
         user.favoriteEarthLocations = [

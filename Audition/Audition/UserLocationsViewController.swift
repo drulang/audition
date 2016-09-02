@@ -13,7 +13,7 @@ private struct Config {
     struct TableView {
         static let cellId = "Location Cell"
     }
-    
+
     struct AddLocationButton {
         static let topInset:CGFloat = 20
         static let rightInset:CGFloat = 20

@@ -10,10 +10,10 @@ import Foundation
 
 class IssLocationFuture {
     var risetimeDate:NSDate
-    let risetime:UInt
+    let risetime:NSTimeInterval
     
-    init(risetime rtime:UInt) {
+    init(risetime rtime:NSTimeInterval) {
         risetime = rtime
-        risetimeDate = NSDate()
+        risetimeDate = NSDate(timeIntervalSince1970: rtime)
     }
 }
