@@ -20,9 +20,16 @@ class UserLocationsViewController: UIViewController {
 //            log.debug("Received future loc: \(futureLocation)")
 //        }
         
-        let earth = EarthService().forwardGeolocateLocation("New york, new york") { (location) in
-            log.debug("Recieved loc: \(location)")
-        };
+        
+        let commandCenter = SystemCommandCenter()
+
+        commandCenter.trackNewLocation("New york, new york", alias: "NYC") { (location:EarthLocation, error:NSError) in
+            
+        }
+
+//        commandCenter.earthService.forwardGeolocateLocation("New york, new york") { (location) in
+//            log.debug("Recieved loc: \(location)")
+//        };
         
     }
 }
