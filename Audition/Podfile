@@ -4,8 +4,8 @@
 
 target 'Audition' do
 
-pod 'PureLayout'
-pod 'Alamofire'
+pod 'PureLayout', '~>3.0.2'
+pod 'Alamofire', '~>4.0.0'
 
 pod 'SwiftyBeaver',
   :git => 'https://github.com/SwiftyBeaver/SwiftyBeaver',
