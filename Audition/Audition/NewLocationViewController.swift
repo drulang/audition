@@ -12,18 +12,18 @@ import UIKit
 
 
 protocol NewLocationViewControllerDelegate {
-    func newLocationViewController(controller: NewLocationViewController, didCreateNewEarthLocation location:EarthLocation)
+    func newLocationViewController(_ controller: NewLocationViewController, didCreateNewEarthLocation location:EarthLocation)
 }
 
 
 class NewLocationViewController: UIViewController {
     
-    private let missionControl:MissionControl
-    private var constraintsAdded:Bool = false
-    private let locationNameTextField:UITextField = UITextField(forAutoLayout: ())
-    private let saveButton:UIButton = UIButton(forAutoLayout: ())
-    private let cancelButton:UIButton = UIButton(forAutoLayout: ())
-    private let activityIndictaor:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+    fileprivate let missionControl:MissionControl
+    fileprivate var constraintsAdded:Bool = false
+    fileprivate let locationNameTextField:UITextField = UITextField(forAutoLayout: ())
+    fileprivate let saveButton:UIButton = UIButton(forAutoLayout: ())
+    fileprivate let cancelButton:UIButton = UIButton(forAutoLayout: ())
+    fileprivate let activityIndictaor:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
     
     var delegate:NewLocationViewControllerDelegate?
 
@@ -47,17 +47,17 @@ class NewLocationViewController: UIViewController {
         activityIndictaor.hidesWhenStopped = true
         activityIndictaor.color = Apperance.Palette.accentColor
         
-        locationNameTextField.backgroundColor = UIColor.clearColor()
+        locationNameTextField.backgroundColor = UIColor.clear
         locationNameTextField.placeholder = "New location..."
         locationNameTextField.font = Apperance.Font.textfieldJumboFont
         locationNameTextField.tintColor = Apperance.Palette.accentColor
         
-        saveButton.setTitle("Save", forState: UIControlState.Normal)
-        saveButton.setTitleColor(Apperance.Palette.accentColor, forState: UIControlState.Normal)
-        saveButton.addTarget(self, action: #selector(saveButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
+        saveButton.setTitle("Save", for: UIControlState())
+        saveButton.setTitleColor(Apperance.Palette.accentColor, for: UIControlState())
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: UIControlEvents.touchUpInside)
     
-        cancelButton.setImage(UIImage.imageTemplate(imageTemplateWithNamed: ImageName.Icon.closeIcon), forState: UIControlState.Normal)
-        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
+        cancelButton.setImage(UIImage.imageTemplate(imageTemplateWithNamed: ImageName.Icon.closeIcon), for: UIControlState())
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: UIControlEvents.touchUpInside)
         cancelButton.tintColor = Apperance.Palette.accentColor
         
         view.addSubview(self.locationNameTextField)
@@ -68,7 +68,7 @@ class NewLocationViewController: UIViewController {
         updateViewConstraints()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationNameTextField.becomeFirstResponder()
     }
@@ -78,24 +78,24 @@ class NewLocationViewController: UIViewController {
             //TODO: (DL) Remove magic no.
             let hInset:CGFloat = 20
             
-            activityIndictaor.autoAlignAxisToSuperviewAxis(ALAxis.Vertical)
-            activityIndictaor.autoConstrainAttribute(ALAttribute.Bottom, toAttribute: ALAttribute.Horizontal, ofView: self.view, withOffset: -25)
+            activityIndictaor.autoAlignAxis(toSuperviewAxis: ALAxis.vertical)
+            activityIndictaor.autoConstrainAttribute(ALAttribute.bottom, to: ALAttribute.horizontal, of: self.view, withOffset: -25)
             
-            locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: 10)
-            locationNameTextField.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: 10)
-            locationNameTextField.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
+            locationNameTextField.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 10)
+            locationNameTextField.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 10)
+            locationNameTextField.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
             locationNameTextField.textColor = Apperance.Palette.Text.secondaryTextColor
-            locationNameTextField.keyboardType = UIKeyboardType.ASCIICapable
-            locationNameTextField.keyboardAppearance = UIKeyboardAppearance.Alert
+            locationNameTextField.keyboardType = UIKeyboardType.asciiCapable
+            locationNameTextField.keyboardAppearance = UIKeyboardAppearance.alert
             locationNameTextField.attributedPlaceholder = NSAttributedString(string:"New location",
                                                             attributes:[NSForegroundColorAttributeName: Apperance.Palette.Text.secondaryTextColor])
             
-            saveButton.autoPinEdgeToSuperviewEdge(ALEdge.Bottom, withInset: 50)
-            saveButton.autoPinEdge(ALEdge.Right, toEdge: ALEdge.Right, ofView: locationNameTextField, withOffset: -hInset)
+            saveButton.autoPinEdge(toSuperviewEdge: ALEdge.bottom, withInset: 50)
+            saveButton.autoPinEdge(ALEdge.right, to: ALEdge.right, of: locationNameTextField, withOffset: -hInset)
 
-            cancelButton.autoPinEdgeToSuperviewEdge(ALEdge.Top, withInset: 30)
-            cancelButton.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: hInset)
-            cancelButton.autoSetDimensionsToSize(CGSize(width: 25, height: 25))
+            cancelButton.autoPinEdge(toSuperviewEdge: ALEdge.top, withInset: 30)
+            cancelButton.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: hInset)
+            cancelButton.autoSetDimensions(to: CGSize(width: 25, height: 25))
             
             constraintsAdded = true
         }
@@ -107,23 +107,23 @@ extension NewLocationViewController {
     func close() {
         locationNameTextField.resignFirstResponder()
         
-        UIView.animateWithDuration(0.1, animations: {
+        UIView.animate(withDuration: 0.1, animations: {
             self.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height)
-        }) { (finished) in
+        }, completion: { (finished) in
             self.view.removeFromSuperview()
             self.removeFromParentViewController()
-        }
+        }) 
     }
     
     func setInterfaceLoading() {
         activityIndictaor.startAnimating()
-        locationNameTextField.enabled = false
-        saveButton.enabled = true
+        locationNameTextField.isEnabled = false
+        saveButton.isEnabled = true
     }
     
     func setInterfaceNormal() {
-        locationNameTextField.enabled = true
-        saveButton.enabled = true
+        locationNameTextField.isEnabled = true
+        saveButton.isEnabled = true
         activityIndictaor.stopAnimating()
     }
 }

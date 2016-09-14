@@ -20,7 +20,7 @@ class HQService {
      
      - Returns: A User object
      */
-    func retrieveUser(userId:UInt, completion:(user:User, error:NSError?)->Void) {
+    func retrieveUser(_ userId:UInt, completion:(_ user:User, _ error:NSError?)->Void) {
         //TODO: user should be optional
         //NOTE: Wire up to some REST API/LocalDB/Space station
         let user = User(userId: userId)
@@ -34,7 +34,7 @@ class HQService {
             nyc
         ]
         
-        completion(user: user, error: nil)
+        completion(user, nil)
     }
     
 }

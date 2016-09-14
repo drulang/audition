@@ -23,7 +23,7 @@ private struct IssServiceConfig {
         static let limit = "n"
         
         struct Value {
-            static let limit:AnyObject = 1
+            static let limit:AnyObject = 1 as AnyObject
         }
     }
     
@@ -42,40 +42,36 @@ private struct IssServiceConfig {
  */
 class IssService {
     
-    func nextOverheadPassPrediction(onEarth location:EarthLocation, withCompletion completion: (futureLocation:IssLocationFuture?, error:NSError?)->Void) {
+    func nextOverheadPassPrediction(onEarth location:EarthLocation, withCompletion completion: @escaping (_ futureLocation:IssLocationFuture?, _ error:NSError?)->Void) {
         let parameters = [
             IssServiceConfig.Parameter.latitude: location.coordinate.latitude,
             IssServiceConfig.Parameter.longitude: location.coordinate.longitude,
             IssServiceConfig.Parameter.limit: IssServiceConfig.Parameter.Value.limit
-        ]
+        ] as [String : Any]
         
-        Alamofire.request(.GET, IssServiceConfig.Paths.prediction, parameters: parameters)
-            .validate()
-            .responseJSON
-            { response in switch response.result {
-            case .Success(let JSON):
-                let response = JSON as! NSDictionary
-                let notifyAPIResponse = response.objectForKey(IssServiceConfig.ResponseKey.response)
-                var futureLocation:IssLocationFuture?
-                
-                if  notifyAPIResponse != nil && notifyAPIResponse!.count > 0 {
-                    if let risetime = notifyAPIResponse![0].objectForKey(IssServiceConfig.ResponseKey.risetime) {
-                        futureLocation = IssLocationFuture(risetime: NSTimeInterval(risetime.unsignedIntegerValue))
-                        log.info("Successfully predicted nextoverhead pass of ISS")
-                    } else {
-                        log.debug("Unable to extract a risetime at given \(location)")
+        
+        Alamofire.request(IssServiceConfig.Paths.prediction, parameters: parameters)
+            .responseJSON { response in
+                if let JSON = response.result.value as? NSDictionary {
+                    let notifyAPIResponse = JSON.object(forKey: IssServiceConfig.ResponseKey.response) as? NSArray
+                    var futureLocation:IssLocationFuture?
+                    
+                    if  notifyAPIResponse != nil && notifyAPIResponse!.count > 0 {
+                        if let firstObject = notifyAPIResponse![0] as? NSDictionary {
+                            if let risetime = firstObject.object(forKey: IssServiceConfig.ResponseKey.risetime) as? NSNumber {
+                                futureLocation = IssLocationFuture(risetime: TimeInterval(risetime.uintValue))
+                                log.info("Successfully predicted nextoverhead pass of ISS")
+                            } else {
+                                log.debug("Unable to extract a risetime at given \(location)")
+                            }
+                        }
                     }
-                }
-                
-                completion(futureLocation: futureLocation, error:nil)
-                
-            case .Failure(let error):
-                print("Request failed with error: \(error)")
+                    completion(futureLocation, nil)
                 }
         }
     }
 
-    func determineNextOverheadPassPredictions(atEarthLocations locations:[EarthLocation], withCompletion completion: (futureLocation:IssLocationFuture?, error:NSError?) -> Void) {
+    func determineNextOverheadPassPredictions(atEarthLocations locations:[EarthLocation], withCompletion completion: @escaping (_ futureLocation:IssLocationFuture?, _ error:NSError?) -> Void) {
         for earthLocation in locations {
             nextOverheadPassPrediction(onEarth: earthLocation, withCompletion: completion)
         }

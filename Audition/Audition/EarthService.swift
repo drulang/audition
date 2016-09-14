@@ -25,7 +25,7 @@ class EarthService {
         - 8329 Tom Cruise Drive
      - Parameter Closure: This will be called after the encoding is complete
      */
-    func forwardGeolocateLocation(locationName:String, withCompletion completion:(coordinate:Coordinate?, name:String?, error:NSError?)->Void) {
+    func forwardGeolocateLocation(_ locationName:String, withCompletion completion:@escaping (_ coordinate:Coordinate?, _ name:String?, _ error:NSError?)->Void) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(locationName) { (placemarks, error) in
             //TODO: (DL) Error handling, logging
@@ -37,7 +37,7 @@ class EarthService {
                 coordinate = Coordinate(latitude: location.latitude, longitude: location.longitude)
             }
             
-            completion(coordinate: coordinate, name: placemark?.name, error: error)
+            completion(coordinate, placemark?.name, error as NSError?)
         }
     }
 }

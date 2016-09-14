@@ -11,11 +11,11 @@ import Foundation
 
 class IssLocationFuture {
 
-    var risetimeDate:NSDate
-    let risetime:NSTimeInterval
+    var risetimeDate:Date
+    let risetime:TimeInterval
     
-    init(risetime rtime:NSTimeInterval) {
+    init(risetime rtime:TimeInterval) {
         risetime = rtime
-        risetimeDate = NSDate(timeIntervalSince1970: rtime)
+        risetimeDate = Date(timeIntervalSince1970: rtime)
     }
 }

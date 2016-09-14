@@ -22,22 +22,22 @@ private struct Config {
 
 
 class UserLocationsViewController: UIViewController {
-    private let dateFormatter = NSDateFormatter()
-    private let missionControl:MissionControl
-    private let user:User
-    private var constraintsAdded:Bool = false
-    private let welcomeLabel:UILabel = UILabel(forAutoLayout: ())
-    private let tableView:UITableView = UITableView(forAutoLayout: ())
-    private let addLocationButton:UIButton = UIButton(forAutoLayout: ())
-    private let toolBar = UIView(forAutoLayout: ())
+    fileprivate let dateFormatter = DateFormatter()
+    fileprivate let missionControl:MissionControl
+    fileprivate let user:User
+    fileprivate var constraintsAdded:Bool = false
+    fileprivate let welcomeLabel:UILabel = UILabel(forAutoLayout: ())
+    fileprivate let tableView:UITableView = UITableView(forAutoLayout: ())
+    fileprivate let addLocationButton:UIButton = UIButton(forAutoLayout: ())
+    fileprivate let toolBar = UIView(forAutoLayout: ())
     
     //MARK: Constructors
     init(missionControl:MissionControl, user:User) {
         self.missionControl = missionControl
         self.user = user
 
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeStyle = .ShortStyle
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
     
         super.init(nibName: nil, bundle: nil)
     }
@@ -70,16 +70,16 @@ class UserLocationsViewController: UIViewController {
         
         let inset:CGFloat = 5
         addLocationButton.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-        addLocationButton.setImage(UIImage.imageTemplate(imageTemplateWithNamed: ImageName.Icon.addLocationIcon), forState: UIControlState.Normal)
+        addLocationButton.setImage(UIImage.imageTemplate(imageTemplateWithNamed: ImageName.Icon.addLocationIcon), for: UIControlState())
         addLocationButton.tintColor = Apperance.Palette.accentColor
         addLocationButton.titleLabel?.font = Apperance.Font.buttonFont
-        addLocationButton.addTarget(self, action: #selector(addLocationButtonTapped), forControlEvents: UIControlEvents.TouchUpInside)
+        addLocationButton.addTarget(self, action: #selector(addLocationButtonTapped), for: UIControlEvents.touchUpInside)
 
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerClass(LocationDetailTableViewCell.self, forCellReuseIdentifier: Config.TableView.cellId)
+        tableView.register(LocationDetailTableViewCell.self, forCellReuseIdentifier: Config.TableView.cellId)
         tableView.allowsSelection = false
         
         updateViewConstraints()
@@ -87,19 +87,19 @@ class UserLocationsViewController: UIViewController {
     
     override func updateViewConstraints() {
         if !constraintsAdded {
-            toolBar.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: ALEdge.Bottom)
-            toolBar.autoSetDimension(ALDimension.Height, toSize: Config.ToolBar.height)
+            toolBar.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.bottom)
+            toolBar.autoSetDimension(ALDimension.height, toSize: Config.ToolBar.height)
 
-            welcomeLabel.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: Config.ToolBar.hInset)
-            welcomeLabel.autoAlignAxis(ALAxis.Horizontal, toSameAxisOfView: addLocationButton)
+            welcomeLabel.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: Config.ToolBar.hInset)
+            welcomeLabel.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: addLocationButton)
 
-            addLocationButton.autoPinEdgeToSuperviewEdge(ALEdge.Top, withInset: Config.ToolBar.hInset)
-            addLocationButton.autoPinEdgeToSuperviewEdge(ALEdge.Bottom, withInset: Config.ToolBar.hInset / 2.0)
-            addLocationButton.autoPinEdgeToSuperviewEdge(ALEdge.Right, withInset: Config.ToolBar.hInset - (Config.ToolBar.hInset / 4.0))
-            addLocationButton.autoConstrainAttribute(ALAttribute.Width, toAttribute: ALAttribute.Height, ofView: addLocationButton)
+            addLocationButton.autoPinEdge(toSuperviewEdge: ALEdge.top, withInset: Config.ToolBar.hInset)
+            addLocationButton.autoPinEdge(toSuperviewEdge: ALEdge.bottom, withInset: Config.ToolBar.hInset / 2.0)
+            addLocationButton.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: Config.ToolBar.hInset - (Config.ToolBar.hInset / 4.0))
+            addLocationButton.autoConstrainAttribute(ALAttribute.width, to: ALAttribute.height, of: addLocationButton)
             
-            tableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: ALEdge.Top)
-            tableView.autoPinEdge(ALEdge.Top, toEdge: ALEdge.Bottom, ofView: toolBar)
+            tableView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.top)
+            tableView.autoPinEdge(ALEdge.top, to: ALEdge.bottom, of: toolBar)
     
             constraintsAdded = true
         }
@@ -120,13 +120,13 @@ extension UserLocationsViewController {
         }
     }
 
-    func updateUserLocationFavorite(earthLocation:EarthLocation) {
+    func updateUserLocationFavorite(_ earthLocation:EarthLocation) {
         missionControl.issService.nextOverheadPassPrediction(onEarth: earthLocation, withCompletion: { (futureLocation, error) in
             earthLocation.issLocationInTheFuture = futureLocation
             
-            if let index = self.user.favoriteEarthLocations.indexOf({ return $0 === earthLocation }) {
-                let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            if let index = self.user.favoriteEarthLocations.index(where: { return $0 === earthLocation }) {
+                let indexPath = IndexPath(row: index, section: 0)
+                self.tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             }
         })
     }
@@ -137,20 +137,20 @@ extension UserLocationsViewController {
  Target/Action
  */
 extension UserLocationsViewController {
-    func addLocationButtonTapped(sender:UIButton) {
+    func addLocationButtonTapped(_ sender:UIButton) {
         log.debug("Adding a new location")
 
         let newLocationController = NewLocationViewController(missionControl: missionControl)
         newLocationController.delegate = self
         self.addChildViewController(newLocationController)
-        newLocationController.didMoveToParentViewController(self)
+        newLocationController.didMove(toParentViewController: self)
         
         self.view.addSubview(newLocationController.view)
         
         //TODO: (DL) COmment, move magic
         newLocationController.view.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: 450)
         
-        UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions(), animations: {
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions(), animations: {
             newLocationController.view.frame = CGRect(x:0, y:0, width: newLocationController.view.frame.width, height: newLocationController.view.frame.height)
         }) { (finished) in
             
@@ -164,7 +164,7 @@ extension UserLocationsViewController {
  */
 extension UserLocationsViewController: NewLocationViewControllerDelegate {
     
-    func newLocationViewController(controller: NewLocationViewController, didCreateNewEarthLocation location: EarthLocation) {
+    func newLocationViewController(_ controller: NewLocationViewController, didCreateNewEarthLocation location: EarthLocation) {
         self.user.favoriteEarthLocations.append(location)
         updateUserLocationFavorite(location)
         tableView.reloadData()
@@ -173,21 +173,21 @@ extension UserLocationsViewController: NewLocationViewControllerDelegate {
 
 
 extension UserLocationsViewController :UITableViewDelegate {
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return LocationDetailTableViewCell.preferredHeight
     }
 }
 
 extension UserLocationsViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.user.favoriteEarthLocations.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Config.TableView.cellId, forIndexPath: indexPath) as! LocationDetailTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Config.TableView.cellId, for: indexPath) as! LocationDetailTableViewCell
 
-        let location = self.user.favoriteEarthLocations[indexPath.row]
+        let location = self.user.favoriteEarthLocations[(indexPath as NSIndexPath).row]
         
         // Set name
         if let locationName = location.name  {
@@ -198,7 +198,7 @@ extension UserLocationsViewController: UITableViewDataSource {
         
         // Set date
         if let issDate = location.issLocationInTheFuture?.risetimeDate {
-            let dateFormatted = dateFormatter.stringFromDate(issDate)
+            let dateFormatted = dateFormatter.string(from: issDate as Date)
 
             cell.locationDetailLabel.text = dateFormatted
         } else {

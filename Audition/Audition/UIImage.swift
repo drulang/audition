@@ -14,7 +14,7 @@ extension UIImage {
         var finalImage:UIImage?
     
         if let image = UIImage(named: imageName) {
-            finalImage = image.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            finalImage = image.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         }
 
         return finalImage

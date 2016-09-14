@@ -12,7 +12,7 @@ import UIKit
 class LocationDetailTableViewCell: UITableViewCell {
     static let preferredHeight:CGFloat = 100
 
-    private var constraintsAdded:Bool = false
+    fileprivate var constraintsAdded:Bool = false
     
     let locationNameLabel = UILabel(forAutoLayout: ())
     let locationDetailLabel = UILabel(forAutoLayout: ())
@@ -21,7 +21,7 @@ class LocationDetailTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
 
         locationNameLabel.font = Apperance.Font.headlineFont
         locationNameLabel.textColor = Apperance.Palette.Text.secondaryTextColor
@@ -44,19 +44,19 @@ class LocationDetailTableViewCell: UITableViewCell {
         let hPadding:CGFloat = 10
 
         if !constraintsAdded {
-            locationNameLabel.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: hPadding)
-            locationNameLabel.autoPinEdgeToSuperviewEdge(ALEdge.Top, withInset: 0)
-            locationNameLabel.autoConstrainAttribute(ALAttribute.Bottom, toAttribute: ALAttribute.Horizontal, ofView: self, withOffset: 0)
+            locationNameLabel.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: hPadding)
+            locationNameLabel.autoPinEdge(toSuperviewEdge: ALEdge.top, withInset: 0)
+            locationNameLabel.autoConstrainAttribute(ALAttribute.bottom, to: ALAttribute.horizontal, of: self, withOffset: 0)
             
-            locationDetailLabel.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: hPadding + 10)
-            locationDetailLabel.autoConstrainAttribute(ALAttribute.Top, toAttribute: ALAttribute.Horizontal, ofView: self, withOffset: 0)
+            locationDetailLabel.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: hPadding + 10)
+            locationDetailLabel.autoConstrainAttribute(ALAttribute.top, to: ALAttribute.horizontal, of: self, withOffset: 0)
 
             constraintsAdded = true
         }
         super.updateConstraints()
     }
     
-    override func intrinsicContentSize() -> CGSize {
+    override var intrinsicContentSize : CGSize {
         return CGSize(width: 100, height: 100)
     }
 }
