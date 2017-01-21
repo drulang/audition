@@ -51,7 +51,12 @@ class NewLocationViewController: UIViewController {
         locationNameTextField.placeholder = "New location..."
         locationNameTextField.font = Apperance.Font.textfieldJumboFont
         locationNameTextField.tintColor = Apperance.Palette.accentColor
-        
+        locationNameTextField.textColor = Apperance.Palette.Text.secondaryTextColor
+        locationNameTextField.keyboardType = UIKeyboardType.asciiCapable
+        locationNameTextField.keyboardAppearance = UIKeyboardAppearance.alert
+        locationNameTextField.attributedPlaceholder = NSAttributedString(string:"New location",
+                                                                         attributes:[NSForegroundColorAttributeName: Apperance.Palette.Text.secondaryTextColor])
+
         saveButton.setTitle("Save", for: UIControlState())
         saveButton.setTitleColor(Apperance.Palette.accentColor, for: UIControlState())
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: UIControlEvents.touchUpInside)
@@ -84,11 +89,6 @@ class NewLocationViewController: UIViewController {
             locationNameTextField.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 10)
             locationNameTextField.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 10)
             locationNameTextField.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
-            locationNameTextField.textColor = Apperance.Palette.Text.secondaryTextColor
-            locationNameTextField.keyboardType = UIKeyboardType.asciiCapable
-            locationNameTextField.keyboardAppearance = UIKeyboardAppearance.alert
-            locationNameTextField.attributedPlaceholder = NSAttributedString(string:"New location",
-                                                            attributes:[NSForegroundColorAttributeName: Apperance.Palette.Text.secondaryTextColor])
             
             saveButton.autoPinEdge(toSuperviewEdge: ALEdge.bottom, withInset: 50)
             saveButton.autoPinEdge(ALEdge.right, to: ALEdge.right, of: locationNameTextField, withOffset: -hInset)
