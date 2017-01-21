@@ -18,6 +18,12 @@
 1. Profit???
 
 
+### Screenshots
+
+![Main](/Screenshots/Main.png "Main")
+![Location](/Screenshots/Location.png "Location")
+![NewLocation](/Screenshots/NewLocation.png "NewLocation")
+
 ### Original Task
 Bob, our CUBWO (Chief Underwater Basket Weaving Officer) has friends who live all over the world, and he wants an app that will remind him to call his friends when the International Space Station (ISS) is overhead for them. Create an iOS application for tracking the ISS using the APIs available at http://open-notify.org/.  You can use any Apple or third-party frameworks you find convenient.
 
